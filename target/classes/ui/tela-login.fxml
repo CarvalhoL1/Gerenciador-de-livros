@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" prefHeight="250" prefWidth="400" spacing="12" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml" fx:controller="ui.TelaLogin">
+    <children>
+        <Label prefHeight="18.0" prefWidth="215.0" text="Email:" />
+        <TextField fx:id="emailCampo" maxWidth="220.0" minWidth="-Infinity" prefHeight="8.0" prefWidth="200.0" promptText="digite o email aqui" />
+        <Label prefHeight="18.0" prefWidth="219.0" text="Senha" />
+        <PasswordField fx:id="senhaCampo" maxWidth="220.0" minWidth="-Infinity" prefHeight="8.0" prefWidth="200.0" promptText="digite a senha aqui" />
+        <Button mnemonicParsing="false" onAction="#fazerLogin" text="Entrar" />
+        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="221.0" text="Não tem uma conta?" textAlignment="CENTER">
+            <font>
+                <Font size="15.0" />
+            </font></Label>
+        <Button mnemonicParsing="false" onAction="#abrirCadastro" text="Cadastre-se" />
+    </children>
+
+</VBox>
