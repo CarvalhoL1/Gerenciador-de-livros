@@ -10,6 +10,8 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         CriarDB.criarTabUser();
+        CriarDB.criarTabLivros();
+        CriarDB.criarTabLivrosUsuario();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/tela-login.fxml"));
         Scene scene = new Scene(loader.load());
