@@ -19,4 +19,20 @@ public class TelaPrincipal {
     public void setUsuario(Contas.manipularDB.Usuario u) {
         mensagem.setText("Bem-vindo, " + u.getNome() + ", o que deseja fazer?");
     }
+    @FXML
+    private void abrirLogin(ActionEvent event){
+        try {
+            javafx.fxml.FXMLLoader loader =
+                    new javafx.fxml.FXMLLoader(getClass().getResource("/ui/tela-login.fxml"));
+
+            javafx.scene.Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new javafx.scene.Scene(root));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

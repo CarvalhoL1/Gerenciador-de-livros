@@ -15,8 +15,6 @@ public class CriarDB {
              Statement statement = connection.createStatement()) {
 
             statement.executeUpdate(sql);
-            System.out.println("Tabela criada");
-
         } catch (SQLException e) {
             System.out.println("Erro ao criar tabela: " + e.getMessage());
 
