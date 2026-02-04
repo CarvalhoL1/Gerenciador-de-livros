@@ -5,6 +5,8 @@ import db.Conectar;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import service.Sessao;
+import service.Contas.*;
 
 public class Livros {
     public class manipularDB{
@@ -26,12 +28,16 @@ public class Livros {
         }
 
         public static void add_livro(String titulo, String descricao, int total_pag) throws SQLException {
-            String insertSQL = "INSERT INTO livros (titulo, descricao, total_paginas) VALUES (?, ?, ?)";
+            if (Sessao.usuarioLogado == null) {
+                throw new IllegalStateException("Nenhum usuário logado.");
+            }
+            String insertSQL = "INSERT INTO livros (id_usuario, titulo, descricao, total_paginas) VALUES (?, ?, ?, ?)";
             try (Connection connection = Conectar.getConnection();
                  PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
-                pstmt.setString(1, titulo);
-                pstmt.setString(2, descricao);
-                pstmt.setInt(3, total_pag);
+                pstmt.setInt(1, Sessao.usuarioLogado.getId());
+                pstmt.setString(2, titulo);
+                pstmt.setString(3, descricao);
+                pstmt.setInt(4, total_pag);
 
                 pstmt.executeUpdate();
             }

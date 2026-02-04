@@ -27,7 +27,7 @@ public class CriarDB {
                 "titulo TEXT NOT NULL," +
                 "descricao TEXT," +
                 "total_paginas INTEGER CHECK(total_paginas > 0)," +
-                "status TEXT NOT NULL DEFAULT 'quero_ler'," +
+                "status TEXT NOT NULL DEFAULT 'quero_ler' " +
                 "CHECK(status IN ('quero_ler','lendo','pausado','lido','abandonado'))," +
                 "pagina_atual INTEGER DEFAULT 0 CHECK(pagina_atual >= 0)," +
                 "atualizado_em TEXT DEFAULT (datetime('now'))," +
