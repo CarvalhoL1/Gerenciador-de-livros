@@ -37,7 +37,6 @@ public class Contas {
                 pstmt.setString(3, hash);
 
                 pstmt.executeUpdate();
-                System.out.println("Usuario " + nome +  " adicionado");
             }
             catch (SQLException e) {
                 e.printStackTrace();

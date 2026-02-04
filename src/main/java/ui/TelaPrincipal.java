@@ -39,6 +39,22 @@ public class TelaPrincipal {
         }
     }
     @FXML
+    private void abrirAddLivro(ActionEvent event){
+        try {
+            javafx.fxml.FXMLLoader loader =
+                    new javafx.fxml.FXMLLoader(getClass().getResource("/ui/tela-addlivro.fxml"));
+
+            javafx.scene.Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new javafx.scene.Scene(root));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
     private void apagarConta(ActionEvent event){
         Contas.manipularDB.Usuario u = Sessao.usuarioLogado;
         Alert aviso = new Alert(Alert.AlertType.CONFIRMATION);

@@ -7,7 +7,7 @@
     <children>
         <Button mnemonicParsing="false" onAction="#abrirLogin" text="Logout" />
         <Label fx:id="mensagem" prefHeight="18.0" prefWidth="221.0" text="" />
-        <Button mnemonicParsing="false" text="Cadastrar novo livro" />
+        <Button mnemonicParsing="false" onAction="#abrirAddLivro" text="Cadastrar novo livro" />
         <Button mnemonicParsing="false" onAction="#apagarConta" text="Apagar conta" />
     </children>
 

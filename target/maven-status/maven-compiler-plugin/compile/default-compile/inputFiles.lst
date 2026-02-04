@@ -1,5 +1,6 @@
 C:\Users\lucas\OneDrive\Documentos\GitHub\Gerenciador-de-livros\src\main\java\db\Conectar.java
 C:\Users\lucas\OneDrive\Documentos\GitHub\Gerenciador-de-livros\src\main\java\ui\TelaLogin.java
+C:\Users\lucas\OneDrive\Documentos\GitHub\Gerenciador-de-livros\src\main\java\service\Livros.java
 C:\Users\lucas\OneDrive\Documentos\GitHub\Gerenciador-de-livros\src\main\java\service\ProtedorSenhas.java
 C:\Users\lucas\OneDrive\Documentos\GitHub\Gerenciador-de-livros\src\main\java\db\CriarDB.java
 C:\Users\lucas\OneDrive\Documentos\GitHub\Gerenciador-de-livros\src\main\java\service\Contas.java
@@ -7,3 +8,4 @@ C:\Users\lucas\OneDrive\Documentos\GitHub\Gerenciador-de-livros\src\main\java\ui
 C:\Users\lucas\OneDrive\Documentos\GitHub\Gerenciador-de-livros\src\main\java\service\Sessao.java
 C:\Users\lucas\OneDrive\Documentos\GitHub\Gerenciador-de-livros\src\main\java\ui\App.java
 C:\Users\lucas\OneDrive\Documentos\GitHub\Gerenciador-de-livros\src\main\java\ui\TelaCadastro.java
+C:\Users\lucas\OneDrive\Documentos\GitHub\Gerenciador-de-livros\src\main\java\ui\TelaAddLivro.java
