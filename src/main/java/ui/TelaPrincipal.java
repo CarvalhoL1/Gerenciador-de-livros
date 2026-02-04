@@ -1,5 +1,7 @@
 package ui;
+import javafx.collections.FXCollections;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import service.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -76,4 +78,20 @@ public class TelaPrincipal {
     @FXML private TableColumn<Livros.manipularDB.livro, Integer> colPaginas;
     @FXML private TableColumn<Livros.manipularDB.livro, String> colStatus;
     @FXML private TableColumn<Livros.manipularDB.livro, Integer> colPaginaAtual;
+    @FXML
+    private void initialize(){
+        colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+        colDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+        colPaginas.setCellValueFactory(new PropertyValueFactory<>("total_pag"));
+        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+        colPaginaAtual.setCellValueFactory(new PropertyValueFactory<>("paginaAtual"));
+        carregarTab();
+    }
+    private void carregarTab(){
+        try {
+            tabela.setItems(FXCollections.observableList(Livros.listarMeusLivros()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
