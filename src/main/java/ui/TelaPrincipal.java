@@ -70,4 +70,10 @@ public class TelaPrincipal {
             }
         }
     }
+    @FXML private TableView<Livros.manipularDB.livro> tabela;
+    @FXML private TableColumn<Livros.manipularDB.livro, String> colTitulo;
+    @FXML private TableColumn<Livros.manipularDB.livro, String> colDescricao;
+    @FXML private TableColumn<Livros.manipularDB.livro, Integer> colPaginas;
+    @FXML private TableColumn<Livros.manipularDB.livro, String> colStatus;
+    @FXML private TableColumn<Livros.manipularDB.livro, Integer> colPaginaAtual;
 }

@@ -9,9 +9,11 @@
         <Label fx:id="mensagem" prefHeight="18.0" prefWidth="221.0" text="" />
         <TableView fx:id="tabela" prefHeight="350" prefWidth="560">
             <columns>
-                <TableColumn fx:id="colTitulo" text="Título" prefWidth="200"/>
-                <TableColumn fx:id="colDescricao" text="Descrição" prefWidth="260"/>
+                <TableColumn fx:id="colTitulo" text="Título" prefWidth="100"/>
+                <TableColumn fx:id="colDescricao" text="Descrição" prefWidth="240"/>
                 <TableColumn fx:id="colPaginas" text="Páginas" prefWidth="100"/>
+                <TableColumn fx:id="colPaginaAtual" text="Página Atual" prefWidth="100"/>
+                <TableColumn fx:id="colStatus" text="Status" prefWidth="50"/>
             </columns>
         </TableView>
 
