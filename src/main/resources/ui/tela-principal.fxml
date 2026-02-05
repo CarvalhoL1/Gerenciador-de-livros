@@ -19,9 +19,10 @@
             <columns>
                 <TableColumn fx:id="colTitulo" prefWidth="100" text="Título" />
                 <TableColumn fx:id="colDescricao" prefWidth="240" text="Descrição" />
-                <TableColumn fx:id="colPaginas" prefWidth="100" text="Páginas" />
-                <TableColumn fx:id="colPaginaAtual" prefWidth="100" text="Página Atual" />
+                <TableColumn fx:id="colPaginas" prefWidth="60" text="Páginas" />
+                <TableColumn fx:id="colPaginaAtual" prefWidth="60" text="Página Atual" />
                 <TableColumn fx:id="colStatus" prefWidth="50" text="Status" />
+                <TableColumn fx:id="acoes" prefWidth="50" text="Ações" />
             </columns>
         </TableView>
 

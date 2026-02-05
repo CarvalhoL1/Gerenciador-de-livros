@@ -1,7 +1,8 @@
 package ui;
 import javafx.collections.FXCollections;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.*;
+import javafx.scene.layout.HBox;
 import service.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -78,16 +79,40 @@ public class TelaPrincipal {
     @FXML private TableColumn<Livros.manipularDB.livro, Integer> colPaginas;
     @FXML private TableColumn<Livros.manipularDB.livro, String> colStatus;
     @FXML private TableColumn<Livros.manipularDB.livro, Integer> colPaginaAtual;
+    @FXML private TableColumn<Livros.manipularDB.livro, Void> acoes;
     @FXML
     private void initialize(){
+        configurarColunaAcoes();
         colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
         colDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
         colPaginas.setCellValueFactory(new PropertyValueFactory<>("total_pag"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         colPaginaAtual.setCellValueFactory(new PropertyValueFactory<>("paginaAtual"));
         carregarTab();
+
     }
+
+    public void configurarColunaAcoes(){
+        acoes.setCellFactory(col -> new TableCell<>() {
+            private final Button btnEditar = new Button("Editar");
+            private final Button btnApagar = new Button("Apagar");
+            private final HBox caixa = new HBox(10, btnEditar, btnApagar);
+            @Override protected void updateItem(Void item, boolean empty){
+                super.updateItem(item, empty);
+                if (empty){
+                    setGraphic(null);
+                    setText(null);
+                }
+                else {
+                    setGraphic(caixa);
+                    setText(null);
+                }
+            }
+        });
+    }
+
     private void carregarTab(){
+
         try {
             tabela.setItems(FXCollections.observableList(Livros.listarMeusLivros()));
         } catch (Exception e) {
