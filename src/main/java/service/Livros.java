@@ -56,6 +56,21 @@ public class Livros {
                 e.printStackTrace();
             }
         }
+        public static void deletar_livro(int id) throws SQLException{
+            String deletSQL = "DELETE FROM livros WHERE id = ?";
+            try (Connection connection = Conectar.getConnection();
+                 PreparedStatement pstmt = connection.prepareStatement(deletSQL)) {
+
+                pstmt.setInt(1, id);
+                int linhasAfetadas = pstmt.executeUpdate();
+                if (linhasAfetadas > 0) {
+                    System.out.println("Livro deletado");
+                }
+                else{
+                    System.out.println("Falha ao deletar livro");
+                }
+            }
+        }
     }
     public static List<manipularDB.livro> listarMeusLivros() throws SQLException {
         String sql = "SELECT id, titulo, descricao, total_paginas, status, pagina_atual " +
