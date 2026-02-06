@@ -71,6 +71,9 @@ public class Livros {
                 }
             }
         }
+        public static void editar(){
+
+        }
     }
     public static List<manipularDB.livro> listarMeusLivros() throws SQLException {
         String sql = "SELECT id, titulo, descricao, total_paginas, status, pagina_atual " +

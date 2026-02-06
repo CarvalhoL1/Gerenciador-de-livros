@@ -5,29 +5,35 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="500" prefWidth="600" spacing="12" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.TelaPrincipal">
+<VBox prefHeight="500" prefWidth="850" spacing="12" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.TelaPrincipal">
     <children>
         <Button mnemonicParsing="false" onAction="#abrirLogin" text="Logout">
          <VBox.margin>
-            <Insets right="500.0" />
+            <Insets left="8.0" right="500.0" top="4.0" />
          </VBox.margin>
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
         <Label fx:id="mensagem" prefHeight="18.0" prefWidth="221.0" text="" />
-        <TableView fx:id="tabela" prefHeight="350" prefWidth="560">
+        <TableView fx:id="tabela" prefHeight="350" prefWidth="800">
             <columns>
-                <TableColumn fx:id="colTitulo" prefWidth="100" text="Título" />
-                <TableColumn fx:id="colDescricao" prefWidth="240" text="Descrição" />
-                <TableColumn fx:id="colPaginas" prefWidth="60" text="Páginas" />
-                <TableColumn fx:id="colPaginaAtual" prefWidth="60" text="Página Atual" />
-                <TableColumn fx:id="colStatus" prefWidth="50" text="Status" />
-                <TableColumn fx:id="acoes" prefWidth="50" text="Ações" />
+                <TableColumn fx:id="colTitulo" prefWidth="150" text="Título" />
+                <TableColumn fx:id="colDescricao" prefWidth="200" text="Descrição" />
+                <TableColumn fx:id="colPaginas" prefWidth="100" text="Páginas" />
+                <TableColumn fx:id="colPaginaAtual" prefWidth="100" text="Página Atual" />
+                <TableColumn fx:id="colStatus" prefWidth="150" text="Status" />
+                <TableColumn fx:id="acoes" prefWidth="100" text="Ações" />
             </columns>
         </TableView>
 
-        <Button mnemonicParsing="false" onAction="#abrirAddLivro" text="Cadastrar novo livro" />
-        <Button mnemonicParsing="false" onAction="#apagarConta" text="Apagar conta" />
+        <Button mnemonicParsing="false" onAction="#abrirAddLivro" text="Cadastrar novo livro">
+         <VBox.margin>
+            <Insets left="8.0" />
+         </VBox.margin></Button>
+        <Button mnemonicParsing="false" onAction="#apagarConta" text="Apagar conta">
+         <VBox.margin>
+            <Insets left="8.0" />
+         </VBox.margin></Button>
     </children>
 
 </VBox>

@@ -107,6 +107,16 @@ public class TelaPrincipal {
                     setGraphic(caixa);
                     setText(null);
                 }
+                btnApagar.setOnAction(event -> {
+                    Livros.manipularDB.livro livro_apagar = getTableView().getItems().get(getIndex());
+                    int id = livro_apagar.getId();
+                    try {
+                        Livros.manipularDB.deletar_livro(id);
+                        getTableView().getItems().remove(livro_apagar);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
             }
         });
     }
