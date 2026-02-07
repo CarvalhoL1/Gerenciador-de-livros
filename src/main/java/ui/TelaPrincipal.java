@@ -117,6 +117,11 @@ public class TelaPrincipal {
             public void startEdit() {
                 super.startEdit();
                 campoTitulo.setText(getItem());
+                setText(null);
+                setGraphic(campoTitulo);
+                campoTitulo.requestFocus();
+                campoTitulo.selectAll();
+                campoTitulo.setText(getItem());
                 campoTitulo.setOnAction(event -> {
                     Livros.manipularDB.livro livro_alterar = getTableView().getItems().get(getIndex());
                     int id = livro_alterar.getId();
