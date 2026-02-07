@@ -22,7 +22,7 @@
                 <TableColumn fx:id="colPaginas" prefWidth="100" text="Páginas" />
                 <TableColumn fx:id="colPaginaAtual" prefWidth="100" text="Página Atual" />
                 <TableColumn fx:id="colStatus" prefWidth="150" text="Status" />
-                <TableColumn fx:id="acoes" prefWidth="100" text="Ações" />
+                <TableColumn fx:id="acoes" prefWidth="100" text="" />
             </columns>
         </TableView>
 

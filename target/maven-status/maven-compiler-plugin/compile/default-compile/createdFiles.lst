@@ -6,6 +6,7 @@ ui\TelaAddLivro.class
 ui\TelaLogin.class
 db\CriarDB.class
 service\Livros.class
+ui\TelaPrincipal$2.class
 db\Conectar.class
 service\Contas$manipularDB.class
 service\Livros$manipularDB.class

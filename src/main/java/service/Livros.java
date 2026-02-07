@@ -2,6 +2,10 @@ package service;
 
 import db.Conectar;
 
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +16,7 @@ import service.Sessao;
 import service.Contas.*;
 
 public class Livros {
-    public class manipularDB{
+    public static class manipularDB{
         public static class livro {
             int id;
             String titulo;
@@ -71,8 +75,20 @@ public class Livros {
                 }
             }
         }
-        public static void editar(){
-
+        public static void editarTitulo (int id, String titulo) throws SQLException{
+            String insertSQL = "UPDATE livros SET titulo = ? WHERE id = ?";
+            try (Connection connection = Conectar.getConnection();
+                 PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
+                pstmt.setString(1, titulo);
+                pstmt.setInt(2, id);
+                int linhasAfetadas = pstmt.executeUpdate();
+                if (linhasAfetadas == 0) {
+                    System.out.println("Falha ao mudar titulo");
+                }
+                else{
+                    System.out.println("Titulo alterado!");
+                }
+            }
         }
     }
     public static List<manipularDB.livro> listarMeusLivros() throws SQLException {

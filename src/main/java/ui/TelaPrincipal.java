@@ -83,7 +83,7 @@ public class TelaPrincipal {
     @FXML
     private void initialize(){
         configurarColunaAcoes();
-        colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+        configurarColunaTitulo();
         colDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
         colPaginas.setCellValueFactory(new PropertyValueFactory<>("total_pag"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
@@ -91,12 +91,51 @@ public class TelaPrincipal {
         carregarTab();
 
     }
+    public void configurarColunaTitulo() {
+        colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+        colTitulo.setCellFactory(column -> new TableCell<Livros.manipularDB.livro, String>() {
+            private final TextField campoTitulo = new TextField();
 
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    if (!isEditing()) {
+                        setGraphic(null);
+                        setText(item);
+                    }
+                    else{
+                        setGraphic(campoTitulo);
+                        setText(null);
+                    }
+                }
+            }
+            @Override
+            public void startEdit() {
+                super.startEdit();
+                campoTitulo.setText(getItem());
+                campoTitulo.setOnAction(event -> {
+                    Livros.manipularDB.livro livro_alterar = getTableView().getItems().get(getIndex());
+                    int id = livro_alterar.getId();
+                    try {
+                        String titulo = campoTitulo.getText();
+                        Livros.manipularDB.editarTitulo(id, titulo);
+
+                        commitEdit(titulo);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+            }
+        });
+    }
     public void configurarColunaAcoes(){
         acoes.setCellFactory(col -> new TableCell<>() {
-            private final Button btnEditar = new Button("Editar");
             private final Button btnApagar = new Button("Apagar");
-            private final HBox caixa = new HBox(10, btnEditar, btnApagar);
+            private final HBox caixa = new HBox(10, btnApagar);
             @Override protected void updateItem(Void item, boolean empty){
                 super.updateItem(item, empty);
                 if (empty){
