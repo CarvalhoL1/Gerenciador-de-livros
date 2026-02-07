@@ -35,18 +35,44 @@ public class TelaAddLivro {
     private void fazerCadastro(ActionEvent event){
         String titulo = tituloCampo.getText().trim();
         String descricao = descCampo.getText().trim();
-        int paginas = Integer.valueOf(pagCampo.getText());
+        String pag_str = pagCampo.getText();
+        int paginas;
 
+        if(pag_str.isEmpty()){
+            paginas = 0;
+        }
+        else if (!eNumero(pag_str)){
+            alert("Total de paginas invalido!");
+            return;
+        }
+        else {
+            paginas = Integer.parseInt(pag_str);
+        }
         if (titulo.isEmpty()) {
             alert("Preencha o titulo.");
             return;
         }
         try{
-            service.Livros.manipularDB.add_livro(titulo, descricao, paginas);
+            if(descricao.isEmpty()) {
+                    service.Livros.manipularDB.add_livro(titulo, "", paginas);
+
+            }
+            else{
+                service.Livros.manipularDB.add_livro(titulo, descricao, paginas);
+            }
             alert("Livro adicionado com sucesso!");
         }
         catch (SQLException ex) {
             alert("Erro no banco: " + ex.getMessage());
+        }
+    }
+    public static boolean eNumero(String str) {
+        if (str == null) return false;
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
     @FXML
