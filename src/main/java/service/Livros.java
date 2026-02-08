@@ -90,6 +90,21 @@ public class Livros {
                 }
             }
         }
+        public static void editarDesricao (int id, String desc) throws SQLException{
+            String insertSQL = "UPDATE livros SET descricao = ? WHERE id = ?";
+            try (Connection connection = Conectar.getConnection();
+                 PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
+                pstmt.setString(1, desc);
+                pstmt.setInt(2, id);
+                int linhasAfetadas = pstmt.executeUpdate();
+                if (linhasAfetadas == 0) {
+                    System.out.println("Falha ao mudar titulo");
+                }
+                else{
+                    System.out.println("Titulo alterado!");
+                }
+            }
+        }
     }
     public static List<manipularDB.livro> listarMeusLivros() throws SQLException {
         String sql = "SELECT id, titulo, descricao, total_paginas, status, pagina_atual " +

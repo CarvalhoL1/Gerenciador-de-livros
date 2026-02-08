@@ -84,7 +84,7 @@ public class TelaPrincipal {
     private void initialize(){
         configurarColunaAcoes();
         configurarColunaTitulo();
-        colDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+        configurarColunaDescricao();
         colPaginas.setCellValueFactory(new PropertyValueFactory<>("total_pag"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         colPaginaAtual.setCellValueFactory(new PropertyValueFactory<>("paginaAtual"));
@@ -130,6 +130,59 @@ public class TelaPrincipal {
                         Livros.manipularDB.editarTitulo(id, titulo);
 
                         commitEdit(titulo);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+            }
+
+            @Override
+            public void cancelEdit() {
+                super.cancelEdit();
+                setGraphic(null);
+                setText(getItem());
+            }
+        });
+    }
+    public void configurarColunaDescricao() {
+        colDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+        colDescricao.setCellFactory(column -> new TableCell<Livros.manipularDB.livro, String>() {
+            private final TextField campoDesc = new TextField();
+
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    if (!isEditing()) {
+                        setGraphic(null);
+                        setText(item);
+                    }
+                    else{
+                        setGraphic(campoDesc);
+                        setText(null);
+                    }
+                }
+            }
+            @Override
+            public void startEdit() {
+                super.startEdit();
+                campoDesc.setText(getItem());
+                setText(null);
+                setGraphic(campoDesc);
+                campoDesc.requestFocus();
+                campoDesc.selectAll();
+                campoDesc.setText(getItem());
+                campoDesc.setOnAction(event -> {
+                    Livros.manipularDB.livro livro_alterar = getTableView().getItems().get(getIndex());
+                    int id = livro_alterar.getId();
+                    try {
+                        String desc = campoDesc.getText();
+                        Livros.manipularDB.editarDesricao(id, desc);
+
+                        commitEdit(desc);
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }

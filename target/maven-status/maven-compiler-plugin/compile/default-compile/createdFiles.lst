@@ -1,4 +1,5 @@
 service\Contas$manipularDB$Usuario.class
+ui\TelaPrincipal$3.class
 ui\TelaPrincipal.class
 service\ProtedorSenhas.class
 ui\App.class
