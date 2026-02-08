@@ -135,6 +135,13 @@ public class TelaPrincipal {
                     }
                 });
             }
+
+            @Override
+            public void cancelEdit() {
+                super.cancelEdit();
+                setGraphic(null);
+                setText(getItem());
+            }
         });
     }
     public void configurarColunaAcoes(){
