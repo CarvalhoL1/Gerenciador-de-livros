@@ -18,6 +18,8 @@ import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
+
+
 public class TelaAddLivro {
     @FXML
     private TextField tituloCampo;
@@ -41,7 +43,7 @@ public class TelaAddLivro {
         if(pag_str.isEmpty()){
             paginas = 0;
         }
-        else if (!eNumero(pag_str)){
+        else if (!(Livros.manipularDB.eNumero(pag_str))){
             alert("Total de paginas invalido!");
             return;
         }
@@ -66,15 +68,7 @@ public class TelaAddLivro {
             alert("Erro no banco: " + ex.getMessage());
         }
     }
-    public static boolean eNumero(String str) {
-        if (str == null) return false;
-        try {
-            Double.parseDouble(str);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
+
     @FXML
     private void voltar(ActionEvent event) throws IOException {
         try {

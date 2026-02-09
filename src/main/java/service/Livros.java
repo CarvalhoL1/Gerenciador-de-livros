@@ -16,7 +16,7 @@ import service.Sessao;
 import service.Contas.*;
 
 public class Livros {
-    public static class manipularDB{
+    public static class manipularDB {
         public static class livro {
             int id;
             String titulo;
@@ -34,12 +34,29 @@ public class Livros {
                 this.paginaAtual = paginaAtual;
             }
 
-            public int getId() { return id; }
-            public String getTitulo() { return titulo; }
-            public String getDescricao() { return descricao; }
-            public int getTotal_pag() { return total_pag; }
-            public String getStatus() { return status; }
-            public int getPaginaAtual() { return paginaAtual; }
+            public int getId() {
+                return id;
+            }
+
+            public String getTitulo() {
+                return titulo;
+            }
+
+            public String getDescricao() {
+                return descricao;
+            }
+
+            public int getTotal_pag() {
+                return total_pag;
+            }
+
+            public String getStatus() {
+                return status;
+            }
+
+            public int getPaginaAtual() {
+                return paginaAtual;
+            }
         }
 
         public static void add_livro(String titulo, String descricao, int total_pag) throws SQLException {
@@ -55,12 +72,12 @@ public class Livros {
                 pstmt.setInt(4, total_pag);
 
                 pstmt.executeUpdate();
-            }
-            catch (SQLException e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        public static void deletar_livro(int id) throws SQLException{
+
+        public static void deletar_livro(int id) throws SQLException {
             String deletSQL = "DELETE FROM livros WHERE id = ?";
             try (Connection connection = Conectar.getConnection();
                  PreparedStatement pstmt = connection.prepareStatement(deletSQL)) {
@@ -69,13 +86,13 @@ public class Livros {
                 int linhasAfetadas = pstmt.executeUpdate();
                 if (linhasAfetadas > 0) {
                     System.out.println("Livro deletado");
-                }
-                else{
+                } else {
                     System.out.println("Falha ao deletar livro");
                 }
             }
         }
-        public static void editarTitulo (int id, String titulo) throws SQLException{
+
+        public static void editarTitulo(int id, String titulo) throws SQLException {
             String insertSQL = "UPDATE livros SET titulo = ? WHERE id = ?";
             try (Connection connection = Conectar.getConnection();
                  PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
@@ -84,13 +101,13 @@ public class Livros {
                 int linhasAfetadas = pstmt.executeUpdate();
                 if (linhasAfetadas == 0) {
                     System.out.println("Falha ao mudar titulo");
-                }
-                else{
+                } else {
                     System.out.println("Titulo alterado!");
                 }
             }
         }
-        public static void editarDesricao (int id, String desc) throws SQLException{
+
+        public static void editarDesricao(int id, String desc) throws SQLException {
             String insertSQL = "UPDATE livros SET descricao = ? WHERE id = ?";
             try (Connection connection = Conectar.getConnection();
                  PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
@@ -99,10 +116,34 @@ public class Livros {
                 int linhasAfetadas = pstmt.executeUpdate();
                 if (linhasAfetadas == 0) {
                     System.out.println("Falha ao mudar titulo");
-                }
-                else{
+                } else {
                     System.out.println("Titulo alterado!");
                 }
+            }
+        }
+
+        public static void editarPagAtual(int id, String pg) throws SQLException {
+            String insertSQL = "UPDATE livros SET pagina_atual = ? WHERE id = ?";
+            try (Connection connection = Conectar.getConnection();
+                 PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
+                pstmt.setString(1, pg);
+                pstmt.setInt(2, id);
+                int linhasAfetadas = pstmt.executeUpdate();
+                if (linhasAfetadas == 0) {
+                    System.out.println("Falha ao mudar pagina");
+                } else {
+                    System.out.println("Pagina alterada!");
+                }
+            }
+        }
+
+        public static boolean eNumero(String str) {
+            if (str == null) return false;
+            try {
+                Double.parseDouble(str);
+                return true;
+            } catch (NumberFormatException e) {
+                return false;
             }
         }
     }
