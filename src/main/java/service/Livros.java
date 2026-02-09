@@ -115,18 +115,18 @@ public class Livros {
                 pstmt.setInt(2, id);
                 int linhasAfetadas = pstmt.executeUpdate();
                 if (linhasAfetadas == 0) {
-                    System.out.println("Falha ao mudar titulo");
+                    System.out.println("Falha ao mudar descrição");
                 } else {
-                    System.out.println("Titulo alterado!");
+                    System.out.println("Descrição alterada!");
                 }
             }
         }
 
-        public static void editarPagAtual(int id, String pg) throws SQLException {
+        public static void editarPagAtual(int id, int pg) throws SQLException {
             String insertSQL = "UPDATE livros SET pagina_atual = ? WHERE id = ?";
             try (Connection connection = Conectar.getConnection();
                  PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
-                pstmt.setString(1, pg);
+                pstmt.setInt(1, pg);
                 pstmt.setInt(2, id);
                 int linhasAfetadas = pstmt.executeUpdate();
                 if (linhasAfetadas == 0) {
