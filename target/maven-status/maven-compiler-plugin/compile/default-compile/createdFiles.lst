@@ -14,5 +14,6 @@ service\Livros$manipularDB.class
 ui\TelaPrincipal$1.class
 service\Contas.class
 service\Livros$manipularDB$livro.class
+ui\TelaPrincipal$4.class
 service\Sessao.class
 ui\TelaCadastro.class
