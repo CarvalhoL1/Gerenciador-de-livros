@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox  styleClass="vbox" stylesheets="@../css/style.css" prefHeight="500" prefWidth="850" spacing="12" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.TelaPrincipal">
+<VBox  styleClass="vbox" stylesheets="@../css/style.css, @../css/styleTabela.css" prefHeight="500" prefWidth="850" spacing="12" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.TelaPrincipal">
     <children>
         <Button mnemonicParsing="false" onAction="#abrirLogin" text="Logout">
          <VBox.margin>
