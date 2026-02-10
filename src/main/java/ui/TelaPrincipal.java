@@ -85,7 +85,7 @@ public class TelaPrincipal {
         configurarColunaAcoes();
         configurarColunaTitulo();
         configurarColunaDescricao();
-        colPaginas.setCellValueFactory(new PropertyValueFactory<>("total_pag"));
+        configurarColunaPagTotal();
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         configurarColunaPagAtual();
         carregarTab();
@@ -194,6 +194,73 @@ public class TelaPrincipal {
                 super.cancelEdit();
                 setGraphic(null);
                 setText(getItem());
+            }
+        });
+    }
+    public void configurarColunaPagTotal() {
+        colPaginas.setCellValueFactory(new PropertyValueFactory<>("total_pag"));
+        colPaginas.setCellFactory(column -> new TableCell<Livros.manipularDB.livro, Integer>() {
+            private final TextField campoPaginas = new TextField();
+
+            @Override
+            protected void updateItem(Integer item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    if (!isEditing()) {
+                        setGraphic(null);
+                        setText(item == null ? "" : item.toString());
+                    }
+                    else{
+                        setGraphic(campoPaginas);
+                        setText(null);
+                    }
+                }
+            }
+            @Override
+            public void startEdit() {
+                Integer valor = getItem();
+                super.startEdit();
+                campoPaginas.setText(valor == null ? "" : valor.toString());
+                setText(null);
+                setGraphic(campoPaginas);
+                campoPaginas.requestFocus();
+                campoPaginas.selectAll();
+                campoPaginas.setText(valor == null ? "" : valor.toString());
+                campoPaginas.setOnAction(event -> {
+                    Livros.manipularDB.livro livro_alterar = getTableView().getItems().get(getIndex());
+                    int id = livro_alterar.getId();
+                    try {
+                        String pg_str = campoPaginas.getText();
+                        int pg_total;
+                        if(pg_str.isEmpty()){
+                            pg_total = 0;
+                        }
+                        else if (!(Livros.manipularDB.eNumero(pg_str))){
+                            alert("Total de paginas invalido!");
+                            return;
+                        }
+                        else {
+                            pg_total = Integer.parseInt(pg_str);
+                        }
+
+                        Livros.manipularDB.editarPagTotal(id, pg_total);
+
+                        commitEdit(pg_total);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+            }
+
+            @Override
+            public void cancelEdit() {
+                Integer valor = getItem();
+                super.cancelEdit();
+                setGraphic(null);
+                setText(valor == null ? "" : valor.toString());
             }
         });
     }

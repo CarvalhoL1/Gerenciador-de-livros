@@ -122,6 +122,21 @@ public class Livros {
             }
         }
 
+        public static void editarPagTotal(int id, int pg) throws SQLException {
+            String insertSQL = "UPDATE livros SET total_paginas = ? WHERE id = ?";
+            try (Connection connection = Conectar.getConnection();
+                 PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
+                pstmt.setInt(1, pg);
+                pstmt.setInt(2, id);
+                int linhasAfetadas = pstmt.executeUpdate();
+                if (linhasAfetadas == 0) {
+                    System.out.println("Falha ao mudar pagina");
+                } else {
+                    System.out.println("Pagina alterada!");
+                }
+            }
+        }
+
         public static void editarPagAtual(int id, int pg) throws SQLException {
             String insertSQL = "UPDATE livros SET pagina_atual = ? WHERE id = ?";
             try (Connection connection = Conectar.getConnection();
