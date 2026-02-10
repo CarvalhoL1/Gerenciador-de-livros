@@ -4,11 +4,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="500" prefWidth="600" spacing="12" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml" fx:controller="ui.TelaLogin">
+<VBox styleClass="vbox" stylesheets="@../css/style-login.css" alignment="CENTER" prefHeight="500" prefWidth="600" spacing="12" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml" fx:controller="ui.TelaLogin">
     <children>
         <Label prefHeight="18.0" prefWidth="215.0" text="Email:" />
         <TextField fx:id="emailCampo" maxWidth="220.0" minWidth="-Infinity" prefHeight="8.0" prefWidth="200.0" promptText="digite o email aqui" />
-        <Label prefHeight="18.0" prefWidth="219.0" text="Senha" />
+        <Label prefHeight="18.0" prefWidth="219.0" text="Senha:" />
         <PasswordField fx:id="senhaCampo" maxWidth="220.0" minWidth="-Infinity" prefHeight="8.0" prefWidth="200.0" promptText="digite a senha aqui" />
         <Button mnemonicParsing="false" onAction="#fazerLogin" text="Entrar" />
         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="221.0" text="Não tem uma conta?" textAlignment="CENTER">

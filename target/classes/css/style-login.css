@@ -1,0 +1,15 @@
+.vbox{
+    -fx-background-color: #170038;
+}
+.button{
+    -fx-background-color: #343bb4;-fx-text-fill: white;
+    -fx-background-radius: 6;
+}
+.label {
+    -fx-text-fill: white;
+}
+
+.text-field, .password-field {
+    -fx-background-radius: 6;
+    -fx-prompt-text-fill: #666666;
+}
