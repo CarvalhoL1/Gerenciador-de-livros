@@ -50,7 +50,7 @@ src
 
 ---
 
-## 🗄️ Banco de Dados
+## Banco de Dados
 
 O sistema utiliza **SQLite**, criando automaticamente o arquivo **base.db**
 
@@ -105,7 +105,7 @@ A interface foi estilizada com CSS para oferecer uma experiência mais moderna e
 
 ---
 
-## 👨‍💻 Autor
+## Autor
 
 **Lucas Carvalho**  
 Estudante e desenvolvedor em formação, focado em aplicações Java e interfaces gráficas.
