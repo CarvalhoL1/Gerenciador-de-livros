@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="500" prefWidth="600" spacing="12" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml" fx:controller="ui.TelaAddLivro">
+<VBox  styleClass="vbox" stylesheets="@../css/style.css" alignment="CENTER" prefHeight="500" prefWidth="600" spacing="12" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml" fx:controller="ui.TelaAddLivro">
     <children>
         <Button mnemonicParsing="false" onAction="#voltar" text="Voltar" />
         <Label prefHeight="18.0" prefWidth="221.0" text="Adicionar Livro: " />
