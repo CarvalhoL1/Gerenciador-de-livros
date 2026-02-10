@@ -347,8 +347,8 @@ public class TelaPrincipal {
                 } else {
                     if (!isEditing()) {
                         setGraphic(null);
-                        //Alterar esse item depois, pois mostra da forma que esta no banco, quero_ler ao inves de Quero ler
-                        setText(item);
+                        String statusTela = exibirStatusNaTela(item);
+                        setText(statusTela);
                     }
                     else{
                         setGraphic(campoStatus);
@@ -389,6 +389,16 @@ public class TelaPrincipal {
                 setText(getItem());
             }
         });
+    }
+    public String exibirStatusNaTela (String status){
+        return switch (status){
+            case "quero_ler" -> "Quero ler";
+            case "lendo" -> "Lendo";
+            case "pausado" -> "Pausado";
+            case "lido" -> "Lido";
+            case "abandonado" -> "Abandonado";
+            default -> status;
+        };
     }
     public void configurarColunaAcoes(){
         acoes.setCellFactory(col -> new TableCell<>() {
