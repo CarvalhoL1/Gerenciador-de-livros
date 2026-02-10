@@ -1,14 +1,10 @@
 service\Contas$manipularDB$Usuario.class
 ui\TelaPrincipal$3.class
-ui\TelaPrincipal.class
 service\ProtedorSenhas.class
-ui\App.class
-ui\TelaAddLivro.class
 ui\TelaLogin.class
-db\CriarDB.class
 service\Livros.class
-ui\TelaPrincipal$2.class
 db\Conectar.class
+ui\TelaPrincipal$6.class
 service\Contas$manipularDB.class
 service\Livros$manipularDB.class
 ui\TelaPrincipal$1.class
@@ -16,4 +12,9 @@ service\Contas.class
 service\Livros$manipularDB$livro.class
 ui\TelaPrincipal$4.class
 service\Sessao.class
+ui\TelaPrincipal.class
+ui\App.class
+ui\TelaAddLivro.class
+db\CriarDB.class
+ui\TelaPrincipal$2.class
 ui\TelaCadastro.class

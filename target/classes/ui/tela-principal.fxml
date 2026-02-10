@@ -15,13 +15,13 @@
             <Font name="System Bold" size="12.0" />
          </font></Button>
         <Label fx:id="mensagem" prefHeight="18.0" prefWidth="221.0" text="" />
-        <TableView fx:id="tabela" prefHeight="350" editable="true" prefWidth="800">
+        <TableView fx:id="tabela" prefHeight="350" editable="true"  prefWidth="800">
             <columns>
                 <TableColumn fx:id="colTitulo" editable="true" prefWidth="150" text="Título" />
                 <TableColumn fx:id="colDescricao" editable="true" prefWidth="200" text="Descrição" />
-                <TableColumn fx:id="colPaginas" prefWidth="100" text="Páginas" />
-                <TableColumn fx:id="colPaginaAtual" prefWidth="100" text="Página Atual" />
-                <TableColumn fx:id="colStatus" prefWidth="150" text="Status" />
+                <TableColumn fx:id="colPaginas" editable="true" prefWidth="100" text="Páginas" />
+                <TableColumn fx:id="colPaginaAtual" editable="true" prefWidth="100" text="Página Atual" />
+                <TableColumn fx:id="colStatus" editable="true" prefWidth="150" text="Status" />
                 <TableColumn fx:id="acoes" prefWidth="100" text="" />
             </columns>
         </TableView>

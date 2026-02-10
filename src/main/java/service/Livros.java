@@ -152,6 +152,20 @@ public class Livros {
             }
         }
 
+        public static void editarStatus(int id, String status) throws SQLException {
+            String insertSQL = "UPDATE livros SET status = ? WHERE id = ?";
+            try (Connection connection = Conectar.getConnection();
+                 PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
+                pstmt.setString(1, status);
+                pstmt.setInt(2, id);
+                int linhasAfetadas = pstmt.executeUpdate();
+                if (linhasAfetadas == 0) {
+                    System.out.println("Falha ao mudar status");
+                } else {
+                    System.out.println("Status alterado!");
+                }
+            }
+        }
         public static boolean eNumero(String str) {
             if (str == null) return false;
             try {

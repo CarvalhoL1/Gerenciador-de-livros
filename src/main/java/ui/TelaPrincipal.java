@@ -1,5 +1,6 @@
 package ui;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.*;
 import javafx.scene.layout.HBox;
@@ -86,7 +87,7 @@ public class TelaPrincipal {
         configurarColunaTitulo();
         configurarColunaDescricao();
         configurarColunaPagTotal();
-        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+        configurarColunaStatus();
         configurarColunaPagAtual();
         carregarTab();
 
@@ -328,6 +329,64 @@ public class TelaPrincipal {
                 super.cancelEdit();
                 setGraphic(null);
                 setText(valor == null ? "" : valor.toString());
+            }
+        });
+    }
+    public void configurarColunaStatus() {
+        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+        colStatus.setCellFactory(column -> new TableCell<Livros.manipularDB.livro, String>() {
+            ObservableList<String> items = FXCollections.observableArrayList("Quero ler", "Lendo", "Pausado", "Lido", "Abandonado");
+            private final ComboBox<String> campoStatus = new ComboBox<>(items);
+
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    if (!isEditing()) {
+                        setGraphic(null);
+                        //Alterar esse item depois, pois mostra da forma que esta no banco, quero_ler ao inves de Quero ler
+                        setText(item);
+                    }
+                    else{
+                        setGraphic(campoStatus);
+                        setText(null);
+                    }
+                }
+            }
+
+            @Override
+            public void startEdit() {
+                super.startEdit();
+                campoStatus.setValue(getItem());
+                setText(null);
+                setGraphic(campoStatus);
+                campoStatus.requestFocus();
+                campoStatus.setValue(getItem());
+                campoStatus.setOnAction(event -> {
+                    Livros.manipularDB.livro livro_alterar = getTableView().getItems().get(getIndex());
+                    int id = livro_alterar.getId();
+                    try {
+                        String status = campoStatus.getValue();
+                        if (status.equals("Quero ler")) Livros.manipularDB.editarStatus(id, "quero_ler");
+                        else if (status.equals("Lendo")) Livros.manipularDB.editarStatus(id, "lendo");
+                        else if (status.equals("Pausado")) Livros.manipularDB.editarStatus(id, "pausado");
+                        else if (status.equals("Lido")) Livros.manipularDB.editarStatus(id, "lido");
+                        else if (status.equals("Abandonado")) Livros.manipularDB.editarStatus(id, "abandonado");
+                        commitEdit(status);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+            }
+
+            @Override
+            public void cancelEdit() {
+                super.cancelEdit();
+                setGraphic(null);
+                setText(getItem());
             }
         });
     }
