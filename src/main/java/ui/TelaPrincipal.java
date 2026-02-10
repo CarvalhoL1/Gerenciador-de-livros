@@ -90,7 +90,12 @@ public class TelaPrincipal {
         configurarColunaStatus();
         configurarColunaPagAtual();
         carregarTab();
-
+        colTitulo.prefWidthProperty().bind(tabela.widthProperty().multiply(0.20));
+        colDescricao.prefWidthProperty().bind(tabela.widthProperty().multiply(0.30));
+        colPaginas.prefWidthProperty().bind(tabela.widthProperty().multiply(0.15));
+        colPaginaAtual.prefWidthProperty().bind(tabela.widthProperty().multiply(0.15));
+        colStatus.prefWidthProperty().bind(tabela.widthProperty().multiply(0.10));
+        acoes.prefWidthProperty().bind(tabela.widthProperty().multiply(0.10));
     }
     public void configurarColunaTitulo() {
         colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));

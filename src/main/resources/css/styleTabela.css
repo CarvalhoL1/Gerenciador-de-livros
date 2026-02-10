@@ -1,5 +1,7 @@
-.table-view{
+.table-column{
     -fx-background-color: #1e1e2f;
     -fx-border-color: #343bb4;
-    -fx-border-radius: 6;
+}
+.table-view .table-cell {
+    -fx-text-fill: white;
 }
