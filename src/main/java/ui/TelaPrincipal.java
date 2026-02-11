@@ -95,7 +95,7 @@ public class TelaPrincipal {
         colPaginas.prefWidthProperty().bind(tabela.widthProperty().multiply(0.15));
         colPaginaAtual.prefWidthProperty().bind(tabela.widthProperty().multiply(0.15));
         colStatus.prefWidthProperty().bind(tabela.widthProperty().multiply(0.10));
-        acoes.prefWidthProperty().bind(tabela.widthProperty().multiply(0.10));
+        acoes.prefWidthProperty().bind(tabela.widthProperty().multiply(0.09));
     }
     public void configurarColunaTitulo() {
         colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
@@ -408,9 +408,11 @@ public class TelaPrincipal {
     public void configurarColunaAcoes(){
         acoes.setCellFactory(col -> new TableCell<>() {
             private final Button btnApagar = new Button("Apagar");
+
             private final HBox caixa = new HBox(10, btnApagar);
             @Override protected void updateItem(Void item, boolean empty){
                 super.updateItem(item, empty);
+                btnApagar.getStyleClass().add("botao-apagar");
                 if (empty){
                     setGraphic(null);
                     setText(null);

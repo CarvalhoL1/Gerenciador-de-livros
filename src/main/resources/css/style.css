@@ -1,8 +1,14 @@
 .vbox{
-    -fx-background-color: #170038;
+    -fx-background-color: linear-gradient(to top,  #170038, #1b26b4);
 }
 .button{
-    -fx-background-color: #343bb4;-fx-text-fill: white;
+    -fx-background-color: #343bb4;
+    -fx-text-fill: white;
+    -fx-background-radius: 6;
+}
+.button:hover{
+    -fx-background-color: #170038;
+    -fx-text-fill: white;
     -fx-background-radius: 6;
 }
 .label {
