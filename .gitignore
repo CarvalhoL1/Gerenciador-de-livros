@@ -1,0 +1,38 @@
+
+# Arquivos de build
+/target/
+/build/
+/out/
+
+# Maven
+dependency-reduced-pom.xml
+
+# Gradle
+.gradle/
+build/
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+hs_err_pid*
+replay_pid*
+
+
+# Banco de dados local
+*.db
+*.sqlite
+*.sqlite3
+
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.swp
+*~
