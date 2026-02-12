@@ -59,7 +59,7 @@ public class Livros {
             }
         }
 
-        public static void add_livro(String titulo, String descricao, int total_pag) throws SQLException {
+        public static void add_livro(String titulo, String descricao, Integer total_pag) throws SQLException {
             if (Sessao.usuarioLogado == null) {
                 throw new IllegalStateException("Nenhum usuário logado.");
             }

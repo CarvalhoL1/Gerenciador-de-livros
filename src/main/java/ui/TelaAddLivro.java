@@ -37,8 +37,8 @@ public class TelaAddLivro {
     private void fazerCadastro(ActionEvent event){
         String titulo = tituloCampo.getText().trim();
         String descricao = descCampo.getText().trim();
-        String pag_str = pagCampo.getText();
-        int paginas;
+        String pag_str = pagCampo.getText().trim();
+        Integer paginas;
 
         if(pag_str.isEmpty()){
             paginas = 0;
