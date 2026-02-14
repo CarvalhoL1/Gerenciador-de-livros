@@ -1,4 +1,5 @@
 package ui;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
@@ -239,7 +240,7 @@ public class TelaPrincipal {
                 campoPaginas.selectAll();
                 campoPaginas.setText(valor == null ? "" : valor.toString());
                 campoPaginas.setOnAction(event -> {
-                    Livros.manipularDB.livro livro_alterar = getTableView().getItems().get(getIndex());
+                    Livros.manipularDB.livro livro_alterar = getTableRow().getItem();
                     int id = livro_alterar.getId();
                     try {
                         String pg_str = campoPaginas.getText();
@@ -256,8 +257,9 @@ public class TelaPrincipal {
                         }
 
                         Livros.manipularDB.editarPagTotal(id, pg_total);
-
+                        livro_alterar.setTotal_pag(pg_total);
                         commitEdit(pg_total);
+                        tabela.refresh();
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
@@ -306,7 +308,7 @@ public class TelaPrincipal {
                 campoPaginaAtual.selectAll();
                 campoPaginaAtual.setText(valor == null ? "" : valor.toString());
                 campoPaginaAtual.setOnAction(event -> {
-                    Livros.manipularDB.livro livro_alterar = getTableView().getItems().get(getIndex());
+                    Livros.manipularDB.livro livro_alterar = getTableRow().getItem();
                     int id = livro_alterar.getId();
                     try {
                         String pg_str = campoPaginaAtual.getText();
@@ -323,8 +325,10 @@ public class TelaPrincipal {
                         }
 
                         Livros.manipularDB.editarPagAtual(id, pg_atual);
+                        livro_alterar.setPaginaAtual(pg_atual);
 
                         commitEdit(pg_atual);
+                        tabela.refresh();
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
@@ -341,6 +345,7 @@ public class TelaPrincipal {
         });
     }
     public void configurarColunaProgresso(){
+        colProgresso.setCellValueFactory(cd -> new ReadOnlyObjectWrapper<>(0));
         colProgresso.setCellFactory(col -> new TableCell<Livros.manipularDB.livro, Integer>() {
             private final Label prog = new Label();
             private final HBox caixa = new HBox(10, prog);
@@ -351,15 +356,15 @@ public class TelaPrincipal {
                     setGraphic(null);
                     return;
                 }
-                Livros.manipularDB.livro livro_progresso = getTableView().getItems().get(getIndex());
+                Livros.manipularDB.livro livro_progresso = getTableRow().getItem();
                 int id = livro_progresso.getId();
 
                 try {
-                    int numeroProgresso = Livros.manipularDB.calcularProgresso(id);
+                    double numeroProgresso = Livros.manipularDB.calcularProgresso(id);
                     if (numeroProgresso != 0) {
-                        prog.setText(numeroProgresso + "%");
+                        prog.setText(String.format("%.2f%%", numeroProgresso));
                     } else {
-                        prog.setText("Dados insuficientes");
+                        prog.setText("Progresso indisponivel");
                     }
                 } catch (java.sql.SQLException e) {
                     System.out.print("Erro ");

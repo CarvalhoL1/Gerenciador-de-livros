@@ -33,6 +33,11 @@ public class Livros {
                 this.status = status;
                 this.paginaAtual = paginaAtual;
             }
+            public void setTitulo(String titulo) { this.titulo = titulo; }
+            public void setDescricao(String descricao) { this.descricao = descricao; }
+            public void setTotal_pag(int total_pag) { this.total_pag = total_pag; }
+            public void setStatus(String status) { this.status = status; }
+            public void setPaginaAtual(int paginaAtual) { this.paginaAtual = paginaAtual; }
 
             public int getId() {
                 return id;
@@ -175,7 +180,7 @@ public class Livros {
                 return false;
             }
         }
-        public static int calcularProgresso(int id) throws SQLException  {
+        public static double calcularProgresso(int id) throws SQLException  {
             String selectSQL = "SELECT total_paginas, pagina_atual FROM livros WHERE id = ?";
             try (Connection connection = Conectar.getConnection();
                  PreparedStatement ps = connection.prepareStatement(selectSQL)) {
@@ -183,10 +188,10 @@ public class Livros {
                 try (ResultSet rs = ps.executeQuery()) {
                     int total = rs.getInt("total_paginas");
                     int atual = rs.getInt("pagina_atual");
-                    if (total == 0 || atual == 0) {
-                        return (atual / total) * 100;
+                    if (total == 0) {
+                        return 0;
                     }
-                    return 0;
+                    return (atual * 100.0) / total;
                 }
 
             }
