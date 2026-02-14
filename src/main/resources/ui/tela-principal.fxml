@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox  styleClass="vbox" stylesheets="@../css/style.css, @../css/styleTabela.css" prefHeight="500" prefWidth="850" spacing="12" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.TelaPrincipal">
+<VBox prefHeight="500" prefWidth="850" spacing="12" styleClass="vbox" stylesheets="@../css/style.css, @../css/styleTabela.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.TelaPrincipal">
     <children>
         <Button mnemonicParsing="false" onAction="#abrirLogin" text="Logout">
          <VBox.margin>
@@ -14,8 +14,16 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
+      <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="18.0" prefWidth="165.0" text="Clique duas vezes para editar!">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <VBox.margin>
+            <Insets left="500.0" />
+         </VBox.margin>
+      </Label>
         <Label fx:id="mensagem" prefHeight="18.0" prefWidth="221.0" text="" />
-        <TableView fx:id="tabela" prefHeight="350" editable="true"  prefWidth="800">
+        <TableView fx:id="tabela" editable="true" prefHeight="350" prefWidth="800">
             <columns>
                 <TableColumn fx:id="colTitulo" editable="true" prefWidth="150" text="Título" />
                 <TableColumn fx:id="colDescricao" editable="true" prefWidth="200" text="Descrição" />
