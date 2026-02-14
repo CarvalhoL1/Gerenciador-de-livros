@@ -175,32 +175,49 @@ public class Livros {
                 return false;
             }
         }
-    }
-    public static List<manipularDB.livro> listarMeusLivros() throws SQLException {
-        String sql = "SELECT id, titulo, descricao, total_paginas, status, pagina_atual " +
-                "FROM livros WHERE id_usuario = ? ORDER BY atualizado_em DESC";
-
-        List<manipularDB.livro> lista = new ArrayList<>();
-
-        try (Connection connection = Conectar.getConnection();
-             PreparedStatement ps = connection.prepareStatement(sql)) {
-
-            ps.setInt(1, Sessao.usuarioLogado.getId());
-
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    lista.add(new manipularDB.livro(
-                            rs.getInt("id"),
-                            rs.getString("titulo"),
-                            rs.getString("descricao"),
-                            rs.getInt("total_paginas"),
-                            rs.getString("status"),
-                            rs.getInt("pagina_atual")
-                    ));
+        public static int calcularProgresso(int id) throws SQLException  {
+            String selectSQL = "SELECT total_paginas, pagina_atual FROM livros WHERE id = ?";
+            try (Connection connection = Conectar.getConnection();
+                 PreparedStatement ps = connection.prepareStatement(selectSQL)) {
+                ps.setInt(1, id);
+                try (ResultSet rs = ps.executeQuery()) {
+                    int total = rs.getInt("total_paginas");
+                    int atual = rs.getInt("pagina_atual");
+                    if (total == 0 || atual == 0) {
+                        return (atual / total) * 100;
+                    }
+                    return 0;
                 }
+
             }
         }
-        return lista;
+        public static List<manipularDB.livro> listarMeusLivros() throws SQLException {
+            String sql = "SELECT id, titulo, descricao, total_paginas, status, pagina_atual " +
+                    "FROM livros WHERE id_usuario = ? ORDER BY atualizado_em DESC";
+
+            List<manipularDB.livro> lista = new ArrayList<>();
+
+            try (Connection connection = Conectar.getConnection();
+                 PreparedStatement ps = connection.prepareStatement(sql)) {
+
+                ps.setInt(1, Sessao.usuarioLogado.getId());
+
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        lista.add(new manipularDB.livro(
+                                rs.getInt("id"),
+                                rs.getString("titulo"),
+                                rs.getString("descricao"),
+                                rs.getInt("total_paginas"),
+                                rs.getString("status"),
+                                rs.getInt("pagina_atual")
+                        ));
+                    }
+                }
+            }
+            return lista;
+        }
+
     }
 
 }

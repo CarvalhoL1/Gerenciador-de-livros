@@ -80,6 +80,7 @@ public class TelaPrincipal {
     @FXML private TableColumn<Livros.manipularDB.livro, Integer> colPaginas;
     @FXML private TableColumn<Livros.manipularDB.livro, String> colStatus;
     @FXML private TableColumn<Livros.manipularDB.livro, Integer> colPaginaAtual;
+    @FXML private TableColumn<Livros.manipularDB.livro, Integer> colProgresso;
     @FXML private TableColumn<Livros.manipularDB.livro, Void> acoes;
     @FXML
     private void initialize(){
@@ -88,12 +89,14 @@ public class TelaPrincipal {
         configurarColunaDescricao();
         configurarColunaPagTotal();
         configurarColunaStatus();
+        configurarColunaProgresso();
         configurarColunaPagAtual();
         carregarTab();
         colTitulo.prefWidthProperty().bind(tabela.widthProperty().multiply(0.20));
         colDescricao.prefWidthProperty().bind(tabela.widthProperty().multiply(0.30));
-        colPaginas.prefWidthProperty().bind(tabela.widthProperty().multiply(0.15));
-        colPaginaAtual.prefWidthProperty().bind(tabela.widthProperty().multiply(0.15));
+        colPaginas.prefWidthProperty().bind(tabela.widthProperty().multiply(0.10));
+        colPaginaAtual.prefWidthProperty().bind(tabela.widthProperty().multiply(0.10));
+        colProgresso.prefWidthProperty().bind(tabela.widthProperty().multiply(0.10));
         colStatus.prefWidthProperty().bind(tabela.widthProperty().multiply(0.10));
         acoes.prefWidthProperty().bind(tabela.widthProperty().multiply(0.09));
     }
@@ -337,6 +340,35 @@ public class TelaPrincipal {
             }
         });
     }
+    public void configurarColunaProgresso(){
+        colProgresso.setCellFactory(col -> new TableCell<Livros.manipularDB.livro, Integer>() {
+            private final Label prog = new Label();
+            private final HBox caixa = new HBox(10, prog);
+            @Override
+            protected void updateItem(Integer item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || getTableRow() == null || getTableRow().getItem() == null) {
+                    setGraphic(null);
+                    return;
+                }
+                Livros.manipularDB.livro livro_progresso = getTableView().getItems().get(getIndex());
+                int id = livro_progresso.getId();
+
+                try {
+                    int numeroProgresso = Livros.manipularDB.calcularProgresso(id);
+                    if (numeroProgresso != 0) {
+                        prog.setText(numeroProgresso + "%");
+                    } else {
+                        prog.setText("Dados insuficientes");
+                    }
+                } catch (java.sql.SQLException e) {
+                    System.out.print("Erro ");
+                    e.printStackTrace();
+                }
+                setGraphic(caixa);
+            }
+        });
+    }
     public void configurarColunaStatus() {
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         colStatus.setCellFactory(column -> new TableCell<Livros.manipularDB.livro, String>() {
@@ -438,7 +470,7 @@ public class TelaPrincipal {
     private void carregarTab(){
 
         try {
-            tabela.setItems(FXCollections.observableList(Livros.listarMeusLivros()));
+            tabela.setItems(FXCollections.observableList(Livros.manipularDB.listarMeusLivros()));
         } catch (Exception e) {
             e.printStackTrace();
         }
