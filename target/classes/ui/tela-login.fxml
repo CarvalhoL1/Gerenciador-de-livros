@@ -3,9 +3,23 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 
-<VBox styleClass="vbox" stylesheets="@../css/style.css" alignment="CENTER" prefHeight="500" prefWidth="600" spacing="12" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml" fx:controller="ui.TelaLogin">
+<VBox alignment="CENTER" prefHeight="500" prefWidth="600" spacing="12" styleClass="vbox" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.TelaLogin">
     <children>
+        <Label styleClass="title" text="Gerenciador de Livros">
+
+
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font></Label>
+        <ImageView fitHeight="50.0" fitWidth="50.0" preserveRatio="true">
+            <image>
+                <Image url="@/assets/book.png" />
+            </image>
+        </ImageView>
+        <VBox alignment="CENTER" maxWidth="300" styleClass="card">
         <Label prefHeight="18.0" prefWidth="215.0" text="Email:" />
         <TextField fx:id="emailCampo" maxWidth="220.0" minWidth="-Infinity" prefHeight="8.0" prefWidth="200.0" promptText="digite o email aqui" />
         <Label prefHeight="18.0" prefWidth="219.0" text="Senha:" />
@@ -16,6 +30,7 @@
                 <Font size="15.0" />
             </font></Label>
         <Button mnemonicParsing="false" onAction="#abrirCadastro" text="Cadastre-se" />
+        </VBox>
     </children>
 
 </VBox>
