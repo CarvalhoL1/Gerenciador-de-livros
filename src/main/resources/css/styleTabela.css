@@ -9,7 +9,9 @@
 .container-principal {
     -fx-padding: 20;
 }
-
+.label{
+    -fx-text-fill: white;
+}
 .table-view {
     -fx-background-color: #1b1530;
     -fx-background-radius: 12;

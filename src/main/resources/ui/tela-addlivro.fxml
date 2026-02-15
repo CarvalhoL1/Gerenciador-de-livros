@@ -6,15 +6,17 @@
 
 <VBox  styleClass="vbox" stylesheets="@../css/style.css" alignment="CENTER" prefHeight="500" prefWidth="600" spacing="12" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml" fx:controller="ui.TelaAddLivro">
     <children>
-        <Button mnemonicParsing="false" onAction="#voltar" text="Voltar" />
-        <Label prefHeight="18.0" prefWidth="221.0" text="Adicionar Livro: " />
-        <Label prefHeight="18.0" prefWidth="215.0" text="titulo:" />
-        <TextField fx:id="tituloCampo" maxWidth="220.0" minWidth="-Infinity" prefHeight="8.0" prefWidth="200.0" promptText="digite o titulo aqui" />
-        <Label prefHeight="18.0" prefWidth="215.0" text="Descrição (opcional): " />
-        <TextField fx:id="descCampo" maxWidth="220.0" minWidth="-Infinity" prefHeight="8.0" prefWidth="200.0" promptText="digite a descrição aqui" />
-        <Label prefHeight="18.0" prefWidth="219.0" text="Total de páginas (opcional): " />
-        <TextField fx:id="pagCampo" maxWidth="220.0" minWidth="-Infinity" prefHeight="8.0" prefWidth="200.0" promptText="digite o total de páginas aqui" />
-        <Button mnemonicParsing="false" onAction="#fazerCadastro" text="Adicionar" />
+        <VBox alignment="CENTER" maxWidth="300" styleClass="card">
+            <Button mnemonicParsing="false" onAction="#voltar" text="Voltar" />
+            <Label prefHeight="18.0" prefWidth="221.0" text="Adicionar Livro: " />
+            <Label prefHeight="18.0" prefWidth="215.0" text="titulo:" />
+            <TextField fx:id="tituloCampo" maxWidth="220.0" minWidth="-Infinity" prefHeight="8.0" prefWidth="200.0" promptText="digite o titulo aqui" />
+            <Label prefHeight="18.0" prefWidth="215.0" text="Descrição (opcional): " />
+            <TextField fx:id="descCampo" maxWidth="220.0" minWidth="-Infinity" prefHeight="8.0" prefWidth="200.0" promptText="digite a descrição aqui" />
+            <Label prefHeight="18.0" prefWidth="219.0" text="Total de páginas (opcional): " />
+            <TextField fx:id="pagCampo" maxWidth="220.0" minWidth="-Infinity" prefHeight="8.0" prefWidth="200.0" promptText="digite o total de páginas aqui" />
+            <Button mnemonicParsing="false" onAction="#fazerCadastro" text="Adicionar" />
+        </VBox>
     </children>
 
 </VBox>

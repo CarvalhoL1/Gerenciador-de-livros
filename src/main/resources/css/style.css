@@ -1,5 +1,5 @@
 .vbox{
-    -fx-background-color: linear-gradient(to top,  #170038, #1b26b4);
+    -fx-background-color: linear-gradient(to top,  #4467f3, #8099ff);
 }
 .button{
     -fx-background-color: #343bb4;
@@ -16,6 +16,7 @@
 }
 .title{
     -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.65), 18, 0.2, 0, 6);
 }
 .text-field, .password-field {
     -fx-background-radius: 6;
