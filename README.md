@@ -11,7 +11,7 @@ Aplicação desktop desenvolvida em **Java** com **JavaFX** para gerenciamento d
 - Cadastro de livros  
 - Edição de informações do livro  
 - Exclusão de livros  
-- Controle de progresso da leitura (página atual)  
+- Controle de progresso da leitura (porcentagem de conclusão)  
 - Definição de status do livro:
      - Quero Ler  
      -  Lendo  
@@ -25,11 +25,12 @@ Aplicação desktop desenvolvida em **Java** com **JavaFX** para gerenciamento d
 ## Tecnologias Utilizadas
 
 - **Java 17+**
-- **JavaFX**
-- **SQLite**
-- **JDBC**
+- **JavaFX (interface)**
+- **SQLite (Banco de dados)**
+- **JDBC (Conexão com banco de dados)**
 - **FXML (Scene Builder)**
-- **CSS (estilização da interface)**
+- **BCrypt (Hash seguro de senhas)**
+- **CSS (Estilização da interface)**
 
 ---
 
@@ -45,6 +46,7 @@ src
  │   │
  │   └─ resources
  │       ├─ ui                → Arquivos FXML
+ │       ├─ assets            → imagens
  │       └─ css               → Arquivos de estilo
 ```
 
@@ -98,14 +100,9 @@ O banco de dados será criado automaticamente na primeira execução.
 
 A interface foi estilizada com CSS para oferecer uma experiência mais moderna e agradável:
 
-- Tema escuro  
-- Botões personalizados  
-- Tabela estilizada  
-- Campos com bordas arredondadas  
+![Tela Login](src/main/resources/assets/Tela-de-Login.png)
+
 
 ---
 
-## Autor
-
-**Lucas Carvalho**  
-Estudante e desenvolvedor em formação, focado em aplicações Java e interfaces gráficas.
+**Ainda estou finalizando a estilização da tela principal*
