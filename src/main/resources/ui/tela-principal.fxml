@@ -5,9 +5,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="500" prefWidth="850" spacing="12" styleClass="vbox" stylesheets="@../css/style.css, @../css/styleTabela.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.TelaPrincipal">
+<VBox prefHeight="500" prefWidth="950" spacing="12" styleClass="vbox" stylesheets="@../css/style.css, @../css/styleTabela.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.TelaPrincipal">
     <children>
         <HBox alignment="CENTER_LEFT" spacing="8">
+            <VBox.margin>
+                <Insets left="10.0" top="10.0" />
+            </VBox.margin>
         <Button mnemonicParsing="false" onAction="#abrirLogin" text="Logout">
          <VBox.margin>
             <Insets left="8.0" right="500.0" top="4.0" />
@@ -16,7 +19,7 @@
             <Font name="System Bold" size="12.0" />
          </font></Button>
         <Label fx:id="mensagem" prefHeight="18.0" prefWidth="221.0" text="" />
-      <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="18.0" prefWidth="165.0" text="Clique duas vezes para editar!">
+      <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="18.0" prefWidth="607.0" text="Clique duas vezes para editar!">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -36,15 +39,19 @@
                 <TableColumn fx:id="acoes" prefWidth="100" text="" />
             </columns>
         </TableView>
-
-        <Button mnemonicParsing="false" onAction="#abrirAddLivro" text="Cadastrar novo livro">
-         <VBox.margin>
-            <Insets left="8.0" />
-         </VBox.margin></Button>
-        <Button mnemonicParsing="false" onAction="#apagarConta" text="Apagar conta">
-         <VBox.margin>
-            <Insets left="8.0" />
-         </VBox.margin></Button>
+        <HBox alignment="CENTER_LEFT" spacing="15">
+            <VBox.margin>
+                <Insets left="10.0" top="10.0" />
+            </VBox.margin>
+            <Button mnemonicParsing="false" onAction="#abrirAddLivro" text="Cadastrar novo livro">
+             <VBox.margin>
+                <Insets left="8.0" />
+             </VBox.margin></Button>
+            <Button mnemonicParsing="false" onAction="#apagarConta" text="Apagar conta">
+             <VBox.margin>
+                <Insets left="8.0" />
+             </VBox.margin></Button>
+        </HBox>
     </children>
 
 </VBox>

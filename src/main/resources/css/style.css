@@ -2,14 +2,14 @@
     -fx-background-color: linear-gradient(to top,  #4467f3, #8099ff);
 }
 .button{
-    -fx-background-color: #343bb4;
+    -fx-background-color: #2563eb;
     -fx-text-fill: white;
-    -fx-background-radius: 6;
+    -fx-background-radius: 10;
 }
 .button:hover{
-    -fx-background-color: #170038;
+    -fx-background-color: linear-gradient(to right, #4863e8, #845ef7);
+    -fx-cursor: hand;
     -fx-text-fill: white;
-    -fx-background-radius: 6;
 }
 .label {
     -fx-text-fill: black;

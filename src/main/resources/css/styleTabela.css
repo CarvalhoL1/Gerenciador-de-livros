@@ -1,50 +1,80 @@
-.table-column{
-    -fx-background-color: #1e1e2f;
-    -fx-border-color: #343bb4;
-}
 .table-view .table-cell {
     -fx-text-fill: white;
 }
-
+.root{
+    -fx-background-color: linear-gradient(to bottom right, #141e30, #243b55);
+    -fx-font-size: 13px;
+}
 .container-principal {
     -fx-padding: 20;
 }
 .label{
     -fx-text-fill: white;
 }
+.table-view .column-header-background {
+    -fx-background-color: #111827;
+}
 .table-view {
-    -fx-background-color: #1b1530;
+    -fx-background-color: #111827;
     -fx-background-radius: 12;
     -fx-border-radius: 12;
-    -fx-border-color: #2d1e5f;
-    -fx-border-width: 1;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 20, 0.3, 0, 6);
+    -fx-border-color: rgba(255,255,255,0.06);
+    -fx-table-cell-border-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 18, 0.25, 0, 6);
+    -fx-padding: 0;
+}
+.table-row-cell {
+    -fx-background-color: #0f172a;
 }
 
-.table-row-cell:selected {
-    -fx-background-color: #4c3aad;
+.table-row-cell:odd {
+    -fx-background-color: #13213d;
 }
-.button {
-    -fx-background-color: linear-gradient(to right, #5f3dc4, #7048e8);
+
+table-view .table-cell {
+    -fx-text-fill: #e5e7eb;
+    -fx-padding: 10 10 10 10;
+    -fx-border-color: transparent;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #172554;
+}
+.table-view .column-header,
+.table-view .filler {
+    -fx-size: 42px;
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(255,255,255,0.06);
+}
+.table-view .column-header-background {
+    -fx-background-color: #0b1220;
+    -fx-background-radius: 12 12 0 0;
+}
+.table-row-cell:selected .table-cell {
     -fx-text-fill: white;
+}
+.table-view:focused {
+    -fx-background-insets: 0;
+}
+.scroll-bar:vertical, .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+.scroll-bar .track {
+    -fx-background-color: rgba(255,255,255,0.06);
     -fx-background-radius: 8;
-    -fx-padding: 6 14 6 14;
-    -fx-font-weight: bold;
 }
 
-.button:hover {
-    -fx-background-color: linear-gradient(to right, #7048e8, #845ef7);
-    -fx-cursor: hand;
-}
-.button {
-    -fx-background-color: linear-gradient(to right, #5f3dc4, #7048e8);
-    -fx-text-fill: white;
+.scroll-bar .thumb {
+    -fx-background-color: rgba(255,255,255,0.18);
     -fx-background-radius: 8;
-    -fx-padding: 6 14 6 14;
-    -fx-font-weight: bold;
 }
 
-.button:hover {
-    -fx-background-color: linear-gradient(to right, #7048e8, #845ef7);
-    -fx-cursor: hand;
+.scroll-bar .thumb:hover {
+    -fx-background-color: rgba(255,255,255,0.28);
 }
+
+
+.hbox {
+    -fx-padding: 20;
+}
+
