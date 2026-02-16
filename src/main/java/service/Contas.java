@@ -81,22 +81,24 @@ public class Contas {
                 }
             }
         }
-
-        public static Usuario buscar_usuario(String email) throws SQLException{
-            String selectSQL = "SELECT id, nome, email, frase, senha_hash FROM usuarios WHERE email = ?";
-            try (Connection connection = Conectar.getConnection();
-                 PreparedStatement pstmt = connection.prepareStatement(selectSQL)) {
-                pstmt.setString(1, email);
-                ResultSet rs = pstmt.executeQuery();
-                if (!rs.next()) return null;
-                return new Usuario(
-                        rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getString("email")
-                );
+        public static Boolean verificarContaExiste(String email){
+            String sql = "SELECT 1 FROM usuarios WHERE email = ?";
+            try (Connection conn = Conectar.getConnection();
+                 PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setString(1, email);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
+            return true;
         }
-
+        //Colocar as funções de editar nome e senha depois
         public static String EditarSenha(String email, String senha_nova) throws SQLException{
             String insertSQL = "UPDATE usuarios SET senha_hash = ? WHERE email = ?";
             try (Connection connection = Conectar.getConnection();

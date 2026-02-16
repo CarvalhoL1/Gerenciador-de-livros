@@ -40,6 +40,10 @@ public class TelaCadastro {
             alert("Preencha email e senha.");
             return;
         }
+        if (Contas.manipularDB.verificarContaExiste(email)){
+            alert("Essa conta já existe, use outro email.");
+            return;
+        }
         try{
             service.Contas.manipularDB.add_usuario(nome, email, senha);
             alert("Conta criada com sucesso! voltando a tela de login");
