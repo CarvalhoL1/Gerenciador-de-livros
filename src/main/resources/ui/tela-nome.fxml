@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" prefHeight="500" prefWidth="950" spacing="12" styleClass="vbox" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.TelaNome">
+    <children>
+        <VBox alignment="CENTER" maxWidth="300" styleClass="card">
+            <Button mnemonicParsing="false" onAction="#voltar" text="Voltar" />
+            <Label prefHeight="18.0" prefWidth="219.0" text="Novo nome:" />
+            <TextField fx:id="nomeCampo" maxWidth="220.0" minWidth="-Infinity" prefHeight="8.0" prefWidth="200.0" promptText="digite o nome aqui" />
+            <Button mnemonicParsing="false" onAction="#mudarNome" text="Alterar nome">
+                <VBox.margin>
+                    <Insets top="8.0" />
+                </VBox.margin></Button>
+
+        </VBox>
+    </children>
+
+</VBox>

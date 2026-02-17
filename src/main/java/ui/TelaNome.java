@@ -21,11 +21,10 @@ import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class TelaSenha {
+public class TelaNome {
+
     @FXML
-    private PasswordField senhaAntigaCampo;
-    @FXML
-    private PasswordField senhaNovaCampo;
+    private TextField nomeCampo;
 
     private void alert(String mensagem) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -34,20 +33,16 @@ public class TelaSenha {
     }
 
     @FXML
-    private void mudarSenha(ActionEvent event) throws SQLException, IOException{
-        String senhaAntiga = senhaAntigaCampo.getText().trim();
-        String senhaNova = senhaNovaCampo.getText().trim();
+    private void mudarNome(ActionEvent event) throws SQLException, IOException{
+        String nome = nomeCampo.getText().trim();
         Usuario u = Sessao.usuarioLogado;
-        if (Contas.manipularDB.autenticar(senhaAntiga, u.getId()) && !senhaNova.isEmpty()) {
-            Contas.manipularDB.EditarSenha(u.getEmail(), senhaNova);
-            alert("Senha alterada com sucesso, voltando a tela principal!");
+        if (!nome.isEmpty()) {
+            Contas.manipularDB.EditarNome(u.getEmail(), nome);
+            alert("Nome alterado com sucesso, voltando a tela principal!");
             voltar(event);
         }
-        else if (senhaNova.isEmpty()){
-            alert("Digite a nova senha!");
-        }
         else {
-            alert("Senha antiga incorreta!");
+            alert("Preencha o nome!");
         }
     }
 
