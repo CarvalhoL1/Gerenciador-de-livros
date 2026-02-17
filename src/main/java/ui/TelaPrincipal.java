@@ -97,13 +97,24 @@ public class TelaPrincipal {
         Alert aviso = new Alert(Alert.AlertType.CONFIRMATION);
         aviso.setContentText("Tem certeza? isso apagara sua conta para sempre");
         Optional<ButtonType> confirmar = aviso.showAndWait();
+        TextInputDialog confirmarSenha = new TextInputDialog();
+        confirmarSenha.setTitle("Confirme sua senha");
+        confirmarSenha.setHeaderText("Digite a senha aqui:");
+        confirmarSenha.setContentText("Senha:");
         if (confirmar.get() == ButtonType.OK){
-            try {
-                Contas.manipularDB.deletar_conta(u.getEmail());
-                alert("Usuario deletado com sucesso! voltando a tela de login");
-                abrirLogin(event);
-            }catch (SQLException ex){
-                alert("Falha ao deletar usuario " + ex.getMessage());
+            Optional<String> senhaCampo =confirmarSenha.showAndWait();
+            String senha = senhaCampo.get();
+            if (Contas.manipularDB.autenticar(senha, u.getId())) {
+                try {
+                    Contas.manipularDB.deletar_conta(u.getEmail());
+                    alert("Usuario deletado com sucesso! voltando a tela de login");
+                    abrirLogin(event);
+                } catch (SQLException ex) {
+                    alert("Falha ao deletar usuario " + ex.getMessage());
+                }
+            }
+            else {
+                alert("Senha incorreta!");
             }
         }
     }
