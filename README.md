@@ -29,7 +29,7 @@ Aplicação desktop desenvolvida em **Java** com **JavaFX** para gerenciamento d
 - **SQLite (Banco de dados)**
 - **JDBC (Conexão com banco de dados)**
 - **FXML (Scene Builder)**
-- **BCrypt (Hash seguro de senhas)**
+- **jBCrypt (Hash seguro de senhas)**
 - **CSS (Estilização da interface)**
 
 ---
