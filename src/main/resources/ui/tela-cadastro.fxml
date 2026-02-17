@@ -1,21 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox styleClass="vbox" stylesheets="@../css/style.css" alignment="CENTER" prefHeight="500" prefWidth="600" spacing="12" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml" fx:controller="ui.TelaCadastro">
+<VBox alignment="CENTER" prefHeight="500" prefWidth="950" spacing="12" styleClass="vbox" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.TelaCadastro">
     <children>
         <VBox alignment="CENTER" maxWidth="300" styleClass="card">
             <Button mnemonicParsing="false" onAction="#abrirLogin" text="Voltar para o login" />
-            <Label prefHeight="18.0" prefWidth="221.0" text="Criar conta" />
-            <Label prefHeight="18.0" prefWidth="215.0" text="Nome:" />
+            <Label prefHeight="18.0" prefWidth="221.0" text="Criar conta">
+            <font>
+               <Font name="System Bold" size="14.0" />
+            </font></Label>
+            <Label prefHeight="18.0" prefWidth="215.0" text="Nome:">
+            <VBox.margin>
+               <Insets top="5.0" />
+            </VBox.margin></Label>
             <TextField fx:id="nomeCampo" maxWidth="220.0" minWidth="-Infinity" prefHeight="8.0" prefWidth="200.0" promptText="digite o nome aqui" />
-            <Label prefHeight="18.0" prefWidth="215.0" text="Email:" />
+            <Label prefHeight="18.0" prefWidth="215.0" text="Email:">
+            <VBox.margin>
+               <Insets top="5.0" />
+            </VBox.margin></Label>
             <TextField fx:id="emailCampo" maxWidth="220.0" minWidth="-Infinity" prefHeight="8.0" prefWidth="200.0" promptText="digite o email aqui" />
-            <Label prefHeight="18.0" prefWidth="219.0" text="Senha" />
+            <Label prefHeight="18.0" prefWidth="219.0" text="Senha">
+            <VBox.margin>
+               <Insets top="5.0" />
+            </VBox.margin></Label>
             <PasswordField fx:id="senhaCampo" maxWidth="220.0" minWidth="-Infinity" prefHeight="8.0" prefWidth="200.0" promptText="digite a senha aqui" />
-            <Button mnemonicParsing="false" onAction="#fazerCadastro" text="Criar conta" />
+            <Button mnemonicParsing="false" onAction="#fazerCadastro" text="Criar conta">
+            <VBox.margin>
+               <Insets top="10.0" />
+            </VBox.margin></Button>
         </VBox>
     </children>
 

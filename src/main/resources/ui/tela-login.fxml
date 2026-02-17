@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="500" prefWidth="600" spacing="12" styleClass="vbox" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.TelaLogin">
+<VBox alignment="CENTER" prefHeight="500" prefWidth="950" spacing="12" styleClass="vbox" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.TelaLogin">
     <children>
         <HBox alignment="CENTER" spacing="8">
             <Label styleClass="title" text="Gerenciador de Livros">
