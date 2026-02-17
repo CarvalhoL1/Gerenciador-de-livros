@@ -51,6 +51,8 @@
              <VBox.margin>
                 <Insets left="8.0" />
              </VBox.margin></Button>
+         <Button mnemonicParsing="false" text="Alterar nome" />
+         <Button mnemonicParsing="false" onAction="#abrirAlterarSenha" text="Alterar senha" />
         </HBox>
     </children>
 

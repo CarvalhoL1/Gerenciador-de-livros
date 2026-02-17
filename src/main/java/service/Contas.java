@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import db.Conectar;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class Contas {
 
@@ -81,6 +82,7 @@ public class Contas {
                 }
             }
         }
+
         public static Boolean verificarContaExiste(String email){
             String sql = "SELECT 1 FROM usuarios WHERE email = ?";
             try (Connection conn = Conectar.getConnection();
@@ -97,6 +99,26 @@ public class Contas {
                 e.printStackTrace();
             }
             return true;
+        }
+
+        public static Boolean autenticar (String senhaDigitada, int id){
+            String sql = "SELECT senha_hash FROM usuarios WHERE id = ?";
+            try (Connection conn = Conectar.getConnection();
+                 PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setInt(1, id);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    String senhaHash = rs.getString("senha_hash");
+                    if (BCrypt.checkpw(senhaDigitada, senhaHash)){
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return false;
         }
         //Colocar as funções de editar nome e senha depois
         public static String EditarSenha(String email, String senha_nova) throws SQLException{
