@@ -53,6 +53,29 @@ table-view .table-cell {
 .table-row-cell:selected .table-cell {
     -fx-text-fill: white;
 }
+.text-field:focused, .combo-box:focused {
+    -fx-background-color: #1e293b;
+    -fx-text-fill: white;
+    -fx-border-color: #2563eb;
+    -fx-border-width: 2;
+}
+.combo-box-popup .list-view {
+    -fx-background-color: #111827;
+    -fx-background-radius: 8;
+}
+
+.combo-box-popup .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #343bb4;
+}
+
+.combo-box-popup .list-cell:selected {
+    -fx-background-color: #4c3aad;
+    -fx-text-fill: white;
+}
 .table-view:focused {
     -fx-background-insets: 0;
 }
@@ -73,7 +96,20 @@ table-view .table-cell {
     -fx-background-color: rgba(255,255,255,0.28);
 }
 
+.progress-bar {
+    -fx-pref-height: 18px;
+    -fx-background-radius: 10;
+}
 
+.progress-bar .track {
+    -fx-background-color: #efefef;
+    -fx-background-radius: 10;
+}
+
+.progress-bar .bar {
+    -fx-background-color: linear-gradient(to right, #6240b6, #05f1ce);
+    -fx-background-radius: 10;
+}
 .hbox {
     -fx-padding: 20;
 }

@@ -272,7 +272,42 @@ public class TelaPrincipal {
         colPaginas.setCellValueFactory(new PropertyValueFactory<>("total_pag"));
         colPaginas.setCellFactory(column -> new TableCell<Livros.manipularDB.livro, Integer>() {
             private final TextField campoPaginas = new TextField();
+            {
+                campoPaginas.setOnAction(e -> salvar());
+                campoPaginas.focusedProperty().addListener((obs, oldV, newV) -> {
+                    if (!newV && isEditing()) salvar();
+                });
+            }
+            private void salvar() {
+                Livros.manipularDB.livro livro = getTableRow().getItem();
+                if (livro == null) { cancelEdit(); return; }
 
+                String novo = campoPaginas.getText();
+
+                try {
+                    String pg_str = campoPaginas.getText();
+                    int pg_total;
+                    if(pg_str.isEmpty()){
+                        pg_total = 0;
+                    }
+                    else if (!(Livros.manipularDB.eNumero(pg_str))){
+                        alert("Total de paginas invalido!");
+                        return;
+                    }
+                    else {
+                        pg_total = Integer.parseInt(pg_str);
+                    }
+
+                    Livros.manipularDB.editarPagTotal(livro.getId(), pg_total);
+                    livro.setTotal_pag(pg_total);
+                    commitEdit(pg_total);
+                    tabela.refresh();
+
+                } catch (SQLException ex) {
+                    alert("Erro ao salvar paginas: " + ex.getMessage());
+                    cancelEdit();
+                }
+            }
             @Override
             protected void updateItem(Integer item, boolean empty) {
                 super.updateItem(item, empty);
@@ -300,31 +335,6 @@ public class TelaPrincipal {
                 campoPaginas.requestFocus();
                 campoPaginas.selectAll();
                 campoPaginas.setText(valor == null ? "" : valor.toString());
-                campoPaginas.setOnAction(event -> {
-                    Livros.manipularDB.livro livro_alterar = getTableRow().getItem();
-                    int id = livro_alterar.getId();
-                    try {
-                        String pg_str = campoPaginas.getText();
-                        int pg_total;
-                        if(pg_str.isEmpty()){
-                            pg_total = 0;
-                        }
-                        else if (!(Livros.manipularDB.eNumero(pg_str))){
-                            alert("Total de paginas invalido!");
-                            return;
-                        }
-                        else {
-                            pg_total = Integer.parseInt(pg_str);
-                        }
-
-                        Livros.manipularDB.editarPagTotal(id, pg_total);
-                        livro_alterar.setTotal_pag(pg_total);
-                        commitEdit(pg_total);
-                        tabela.refresh();
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
             }
 
             @Override
@@ -340,7 +350,39 @@ public class TelaPrincipal {
         colPaginaAtual.setCellValueFactory(new PropertyValueFactory<>("paginaAtual"));
         colPaginaAtual.setCellFactory(column -> new TableCell<Livros.manipularDB.livro, Integer>() {
             private final TextField campoPaginaAtual = new TextField();
+            {
+                campoPaginaAtual.setOnAction(e -> salvar());
+                campoPaginaAtual.focusedProperty().addListener((obs, oldV, newV) -> {
+                    if (!newV && isEditing()) salvar();
+                });
+            }
+            private void salvar() {
+                Livros.manipularDB.livro livro = getTableRow().getItem();
+                if (livro == null) { cancelEdit(); return; }
+                try {
+                    String pg_str = campoPaginaAtual.getText();
+                    int pg_atual;
+                    if(pg_str.isEmpty()){
+                        pg_atual = 0;
+                    }
+                    else if (!(Livros.manipularDB.eNumero(pg_str))){
+                        alert("Total de paginas invalido!");
+                        return;
+                    }
+                    else {
+                        pg_atual = Integer.parseInt(pg_str);
+                    }
 
+                    Livros.manipularDB.editarPagAtual(livro.getId(), pg_atual);
+                    livro.setPaginaAtual(pg_atual);
+                    commitEdit(pg_atual);
+                    tabela.refresh();
+
+                } catch (SQLException ex) {
+                    alert("Erro ao salvar paginas: " + ex.getMessage());
+                    cancelEdit();
+                }
+            }
             @Override
             protected void updateItem(Integer item, boolean empty) {
                 super.updateItem(item, empty);
@@ -368,32 +410,6 @@ public class TelaPrincipal {
                 campoPaginaAtual.requestFocus();
                 campoPaginaAtual.selectAll();
                 campoPaginaAtual.setText(valor == null ? "" : valor.toString());
-                campoPaginaAtual.setOnAction(event -> {
-                    Livros.manipularDB.livro livro_alterar = getTableRow().getItem();
-                    int id = livro_alterar.getId();
-                    try {
-                        String pg_str = campoPaginaAtual.getText();
-                        int pg_atual;
-                        if(pg_str.isEmpty()){
-                            pg_atual = 0;
-                        }
-                        else if (!(Livros.manipularDB.eNumero(pg_str))){
-                            alert("Total de paginas invalido!");
-                            return;
-                        }
-                        else {
-                            pg_atual = Integer.parseInt(pg_str);
-                        }
-
-                        Livros.manipularDB.editarPagAtual(id, pg_atual);
-                        livro_alterar.setPaginaAtual(pg_atual);
-
-                        commitEdit(pg_atual);
-                        tabela.refresh();
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
             }
 
             @Override
@@ -443,6 +459,29 @@ public class TelaPrincipal {
         colStatus.setCellFactory(column -> new TableCell<Livros.manipularDB.livro, String>() {
             ObservableList<String> items = FXCollections.observableArrayList("Quero ler", "Lendo", "Pausado", "Lido", "Abandonado");
             private final ComboBox<String> campoStatus = new ComboBox<>(items);
+            {
+                campoStatus.setOnAction(e -> salvar());
+                campoStatus.focusedProperty().addListener((obs, oldV, newV) -> {
+                    if (!newV && isEditing()) salvar();
+                });
+            }
+            private void salvar() {
+                Livros.manipularDB.livro livro = getTableRow().getItem();
+                int id = livro.getId();
+                if (livro == null) { cancelEdit(); return; }
+                try {
+                    String status = campoStatus.getValue();
+                    String statusDB = exibirStatusParaDB(status);
+                    Livros.manipularDB.editarStatus(id, statusDB);
+                    livro.setStatus(statusDB);
+                    commitEdit(statusDB);
+                }
+                catch (SQLException ex) {
+                    alert("Erro ao salvar status: " + ex.getMessage());
+                    cancelEdit();
+                }
+
+            }
 
             @Override
             protected void updateItem(String item, boolean empty) {
@@ -466,33 +505,17 @@ public class TelaPrincipal {
             @Override
             public void startEdit() {
                 super.startEdit();
-                campoStatus.setValue(getItem());
+                campoStatus.setValue(exibirStatusNaTela(getItem()));
                 setText(null);
                 setGraphic(campoStatus);
                 campoStatus.requestFocus();
-                campoStatus.setValue(getItem());
-                campoStatus.setOnAction(event -> {
-                    Livros.manipularDB.livro livro_alterar = getTableView().getItems().get(getIndex());
-                    int id = livro_alterar.getId();
-                    try {
-                        String status = campoStatus.getValue();
-                        if (status.equals("Quero ler")) Livros.manipularDB.editarStatus(id, "quero_ler");
-                        else if (status.equals("Lendo")) Livros.manipularDB.editarStatus(id, "lendo");
-                        else if (status.equals("Pausado")) Livros.manipularDB.editarStatus(id, "pausado");
-                        else if (status.equals("Lido")) Livros.manipularDB.editarStatus(id, "lido");
-                        else if (status.equals("Abandonado")) Livros.manipularDB.editarStatus(id, "abandonado");
-                        commitEdit(status);
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
             }
 
             @Override
             public void cancelEdit() {
                 super.cancelEdit();
                 setGraphic(null);
-                setText(getItem());
+                setText(exibirStatusNaTela(getItem()));
             }
         });
     }
@@ -503,6 +526,16 @@ public class TelaPrincipal {
             case "pausado" -> "Pausado";
             case "lido" -> "Lido";
             case "abandonado" -> "Abandonado";
+            default -> status;
+        };
+    }
+    public String exibirStatusParaDB(String status){
+        return switch (status){
+            case "Quero ler" -> "quero_ler";
+            case "Lendo" -> "lendo";
+            case "Pausado" -> "pausado";
+            case "Lido" -> "lido";
+            case "Abandonado" -> "abandonado";
             default -> status;
         };
     }

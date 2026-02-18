@@ -2,7 +2,7 @@
     -fx-background-color: linear-gradient(to bottom right, #141e30, #243b55);
 }
 .button{
-    -fx-background-color: #2563eb;
+    -fx-background-color: #0f45bd;
     -fx-text-fill: white;
     -fx-background-radius: 10;
 }
