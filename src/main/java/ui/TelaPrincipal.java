@@ -136,11 +136,11 @@ public class TelaPrincipal {
         configurarColunaProgresso();
         configurarColunaPagAtual();
         carregarTab();
-        colTitulo.prefWidthProperty().bind(tabela.widthProperty().multiply(0.20));
-        colDescricao.prefWidthProperty().bind(tabela.widthProperty().multiply(0.30));
+        colTitulo.prefWidthProperty().bind(tabela.widthProperty().multiply(0.16));
+        colDescricao.prefWidthProperty().bind(tabela.widthProperty().multiply(0.26));
         colPaginas.prefWidthProperty().bind(tabela.widthProperty().multiply(0.10));
         colPaginaAtual.prefWidthProperty().bind(tabela.widthProperty().multiply(0.10));
-        colProgresso.prefWidthProperty().bind(tabela.widthProperty().multiply(0.10));
+        colProgresso.prefWidthProperty().bind(tabela.widthProperty().multiply(0.18));
         colStatus.prefWidthProperty().bind(tabela.widthProperty().multiply(0.10));
         acoes.prefWidthProperty().bind(tabela.widthProperty().multiply(0.09));
     }
@@ -409,7 +409,8 @@ public class TelaPrincipal {
         colProgresso.setCellValueFactory(cd -> new ReadOnlyObjectWrapper<>(0));
         colProgresso.setCellFactory(col -> new TableCell<Livros.manipularDB.livro, Integer>() {
             private final Label prog = new Label();
-            private final HBox caixa = new HBox(10, prog);
+            private final ProgressBar barraProg = new ProgressBar();
+            private final HBox caixa = new HBox(10, barraProg, prog);
             @Override
             protected void updateItem(Integer item, boolean empty) {
                 super.updateItem(item, empty);
@@ -424,8 +425,10 @@ public class TelaPrincipal {
                     double numeroProgresso = Livros.manipularDB.calcularProgresso(id);
                     if (numeroProgresso != 0) {
                         prog.setText(String.format("%.2f%%", numeroProgresso));
+                        barraProg.setProgress(numeroProgresso/100);
                     } else {
-                        prog.setText("Progresso indisponivel");
+                        prog.setText("indisponivel");
+                        barraProg.setProgress(0);
                     }
                 } catch (java.sql.SQLException e) {
                     System.out.print("Erro ");
