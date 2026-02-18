@@ -148,7 +148,28 @@ public class TelaPrincipal {
         colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
         colTitulo.setCellFactory(column -> new TableCell<Livros.manipularDB.livro, String>() {
             private final TextField campoTitulo = new TextField();
+            {
+                campoTitulo.setOnAction(e -> salvar());
+                campoTitulo.focusedProperty().addListener((obs, oldV, newV) -> {
+                    if (!newV && isEditing()) salvar();
+                });
+            }
 
+            private void salvar() {
+                Livros.manipularDB.livro livro = getTableRow().getItem();
+                if (livro == null) { cancelEdit(); return; }
+
+                String novo = campoTitulo.getText();
+
+                try {
+                    Livros.manipularDB.editarTitulo(livro.getId(), novo);
+                    livro.setTitulo(novo);
+                    commitEdit(novo);
+                } catch (SQLException ex) {
+                    alert("Erro ao salvar título: " + ex.getMessage());
+                    cancelEdit();
+                }
+            }
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
@@ -175,18 +196,6 @@ public class TelaPrincipal {
                 campoTitulo.requestFocus();
                 campoTitulo.selectAll();
                 campoTitulo.setText(getItem());
-                campoTitulo.setOnAction(event -> {
-                    Livros.manipularDB.livro livro_alterar = getTableView().getItems().get(getIndex());
-                    int id = livro_alterar.getId();
-                    try {
-                        String titulo = campoTitulo.getText();
-                        Livros.manipularDB.editarTitulo(id, titulo);
-
-                        commitEdit(titulo);
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
             }
 
             @Override
@@ -201,7 +210,28 @@ public class TelaPrincipal {
         colDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
         colDescricao.setCellFactory(column -> new TableCell<Livros.manipularDB.livro, String>() {
             private final TextField campoDesc = new TextField();
+            {
+                campoDesc.setOnAction(e -> salvar());
+                campoDesc.focusedProperty().addListener((obs, oldV, newV) -> {
+                    if (!newV && isEditing()) salvar();
+                });
+            }
 
+            private void salvar() {
+                Livros.manipularDB.livro livro = getTableRow().getItem();
+                if (livro == null) { cancelEdit(); return; }
+
+                String novo = campoDesc.getText();
+
+                try {
+                    Livros.manipularDB.editarDesricao(livro.getId(), novo);
+                    livro.setDescricao(novo);
+                    commitEdit(novo);
+                } catch (SQLException ex) {
+                    alert("Erro ao salvar descrição: " + ex.getMessage());
+                    cancelEdit();
+                }
+            }
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
@@ -228,18 +258,6 @@ public class TelaPrincipal {
                 campoDesc.requestFocus();
                 campoDesc.selectAll();
                 campoDesc.setText(getItem());
-                campoDesc.setOnAction(event -> {
-                    Livros.manipularDB.livro livro_alterar = getTableView().getItems().get(getIndex());
-                    int id = livro_alterar.getId();
-                    try {
-                        String desc = campoDesc.getText();
-                        Livros.manipularDB.editarDesricao(id, desc);
-
-                        commitEdit(desc);
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
             }
 
             @Override
