@@ -188,9 +188,8 @@ public class Livros {
                 try (ResultSet rs = ps.executeQuery()) {
                     int total = rs.getInt("total_paginas");
                     int atual = rs.getInt("pagina_atual");
-                    if (total == 0) {
-                        return 0;
-                    }
+                    if (total == 0 || atual == 0) return 0;
+                    else if (atual > total) return 100;
                     return (atual * 100.0) / total;
                 }
 

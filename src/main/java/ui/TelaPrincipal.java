@@ -439,13 +439,9 @@ public class TelaPrincipal {
 
                 try {
                     double numeroProgresso = Livros.manipularDB.calcularProgresso(id);
-                    if (numeroProgresso != 0) {
-                        prog.setText(String.format("%.2f%%", numeroProgresso));
-                        barraProg.setProgress(numeroProgresso/100);
-                    } else {
-                        prog.setText("indisponivel");
-                        barraProg.setProgress(0);
-                    }
+                    prog.setText(String.format("%.0f%%", numeroProgresso));
+                    barraProg.setProgress(numeroProgresso/100);
+
                 } catch (java.sql.SQLException e) {
                     System.out.print("Erro ");
                     e.printStackTrace();

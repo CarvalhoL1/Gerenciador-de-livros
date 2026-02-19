@@ -102,7 +102,7 @@ table-view .table-cell {
 }
 
 .progress-bar .track {
-    -fx-background-color: #efefef;
+    -fx-background-color: #1b269e;
     -fx-background-radius: 10;
 }
 
@@ -113,4 +113,12 @@ table-view .table-cell {
 .hbox {
     -fx-padding: 20;
 }
-
+#msgEditar{
+    -fx-background-color: rgba(255,255,255,0.15);
+    -fx-text-fill: white;
+    -fx-padding: 6 14;
+    -fx-background-radius: 50;
+    -fx-border-radius: 50;
+    -fx-border-color: rgba(255,255,255,0.3);
+    -fx-alignment: center;
+}
