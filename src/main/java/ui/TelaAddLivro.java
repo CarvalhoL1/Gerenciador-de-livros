@@ -3,15 +3,11 @@ package ui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import service.Livros;
-import service.Livros.manipularDB.livro;
 import service.Sessao;
 
 import java.awt.*;
@@ -63,6 +59,9 @@ public class TelaAddLivro {
                 service.Livros.manipularDB.add_livro(titulo, descricao, paginas);
             }
             alert("Livro adicionado com sucesso!");
+            tituloCampo.clear();
+            pagCampo.clear();
+            descCampo.clear();
         }
         catch (SQLException ex) {
             alert("Erro no banco: " + ex.getMessage());
