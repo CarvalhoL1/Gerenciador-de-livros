@@ -17,7 +17,7 @@ public class Contas {
             int id;
             String nome;
             String email;
-
+            //getters e setters, mas não carrega a senha por segurança
             public Usuario(int id, String nome, String email) {
                 this.id = id;
                 this.nome = nome;
@@ -28,7 +28,9 @@ public class Contas {
             public String getNome() { return nome; }
             public String getEmail() { return email; }
         }
+        //daqui pra baixo, a logica é criar uma query com base nos dados fornecidos e efetiva-la no banco
         public static void add_usuario(String nome, String email, String senha) throws SQLException{
+            //Salva apenas a senha hash no banco, por segurança
             String insertSQL = "INSERT INTO usuarios (nome, email, senha_hash) VALUES (?, ?, ?)";
             String hash = ProtedorSenhas.hashPassword(senha);
             try (Connection connection = Conectar.getConnection();
@@ -55,6 +57,7 @@ public class Contas {
 
                 if (!rs.next()) return null;
                 String hashSalvo = rs.getString("senha_hash");
+                //confere a senha, se não for a senha correta, retorna nulo, se for, retorna os dados
                 if (!ProtedorSenhas.checkPassword(senha, hashSalvo)) {
                     return null;
                 }
@@ -68,6 +71,7 @@ public class Contas {
         }
 
         public static void deletar_conta(String email) throws SQLException{
+            //query simples de deletar usuario, confere quantas linhas foram afetadas no banco depois do delete
             String deletSQL = "DELETE FROM usuarios WHERE email = ?";
             try (Connection connection = Conectar.getConnection();
                  PreparedStatement pstmt = connection.prepareStatement(deletSQL)) {
@@ -89,6 +93,7 @@ public class Contas {
                  PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setString(1, email);
                 try (ResultSet rs = stmt.executeQuery()) {
+                    //tenta achar 1 usuario com esse email, se achar, retorna verdadeiro, se não falso
                     if (rs.next()) {
                         return true;
                     } else {
@@ -98,7 +103,8 @@ public class Contas {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            return true;
+            //caso o banco falhe, retorna falso
+            return false;
         }
 
         public static Boolean autenticar (String senhaDigitada, int id){
@@ -108,6 +114,7 @@ public class Contas {
                 stmt.setInt(1, id);
                 try (ResultSet rs = stmt.executeQuery()) {
                     String senhaHash = rs.getString("senha_hash");
+                    //Usa a função de conferir senhas comparando a senha fornecida pelo usuario com aultilizada no banco
                     if (BCrypt.checkpw(senhaDigitada, senhaHash)){
                         return true;
                     }
@@ -120,7 +127,6 @@ public class Contas {
             }
             return false;
         }
-        //Colocar as funções de editar nome e senha depois
         public static String EditarSenha(String email, String senha_nova) throws SQLException{
             String insertSQL = "UPDATE usuarios SET senha_hash = ? WHERE email = ?";
             try (Connection connection = Conectar.getConnection();

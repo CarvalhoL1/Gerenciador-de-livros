@@ -29,6 +29,7 @@ public class Livros {
                 this.status = status;
                 this.paginaAtual = paginaAtual;
             }
+            //getters e setters do livro
             public void setTitulo(String titulo) { this.titulo = titulo; }
             public void setDescricao(String descricao) { this.descricao = descricao; }
             public void setTotal_pag(int total_pag) { this.total_pag = total_pag; }
@@ -79,6 +80,7 @@ public class Livros {
         }
 
         public static void deletar_livro(int id) throws SQLException {
+            //mesma logica ultilizada nas contas, se nenhuma linha for afetada depois do delete, então deu erro
             String deletSQL = "DELETE FROM livros WHERE id = ?";
             try (Connection connection = Conectar.getConnection();
                  PreparedStatement pstmt = connection.prepareStatement(deletSQL)) {
@@ -192,6 +194,7 @@ public class Livros {
             }
         }
         public static List<manipularDB.livro> listarMeusLivros() throws SQLException {
+            // Busca todos os livros do usuário logado e retorna em uma lista
             String sql = "SELECT id, titulo, descricao, total_paginas, status, pagina_atual " +
                     "FROM livros WHERE id_usuario = ? ORDER BY atualizado_em DESC";
 
