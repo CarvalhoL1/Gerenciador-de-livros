@@ -24,7 +24,7 @@ Aplicação desktop desenvolvida em **Java** com **JavaFX** para gerenciamento d
 
 ## Tecnologias Utilizadas
 
-- **Java 17+**
+- **Java 25**
 - **JavaFX (interface)**
 - **SQLite (Banco de dados)**
 - **JDBC (Conexão com banco de dados)**
