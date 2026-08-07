@@ -1,4 +1,4 @@
-package ui;
+package controller;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +16,7 @@ import java.util.Optional;
 public class TelaPrincipal {
     @FXML
     private Label mensagem;
-    public void setUsuario(Contas.manipularDB.Usuario u) {
+    public void setUsuario(ContasService.manipularDB.Usuario u) {
         mensagem.setText("Bem-vindo, " + u.getNome() + ", o que deseja fazer?");
     }
     private void alert(String mensagem) {
@@ -90,7 +90,7 @@ public class TelaPrincipal {
     }
     @FXML
     private void apagarConta(ActionEvent event){
-        Contas.manipularDB.Usuario u = Sessao.usuarioLogado;
+        ContasService.manipularDB.Usuario u = Sessao.usuarioLogado;
         Alert aviso = new Alert(Alert.AlertType.CONFIRMATION);
         aviso.setContentText("Tem certeza? isso apagara sua conta para sempre");
         Optional<ButtonType> confirmar = aviso.showAndWait();
@@ -101,9 +101,9 @@ public class TelaPrincipal {
         if (confirmar.get() == ButtonType.OK){
             Optional<String> senhaCampo =confirmarSenha.showAndWait();
             String senha = senhaCampo.get();
-            if (Contas.manipularDB.autenticar(senha, u.getId())) {
+            if (ContasService.manipularDB.autenticar(senha, u.getId())) {
                 try {
-                    Contas.manipularDB.deletar_conta(u.getEmail());
+                    ContasService.manipularDB.deletar_conta(u.getEmail());
                     alert("Usuario deletado com sucesso! voltando a tela de login");
                     abrirLogin(event);
                 } catch (SQLException ex) {
@@ -115,14 +115,14 @@ public class TelaPrincipal {
             }
         }
     }
-    @FXML private TableView<Livros.manipularDB.livro> tabela;
-    @FXML private TableColumn<Livros.manipularDB.livro, String> colTitulo;
-    @FXML private TableColumn<Livros.manipularDB.livro, String> colDescricao;
-    @FXML private TableColumn<Livros.manipularDB.livro, Integer> colPaginas;
-    @FXML private TableColumn<Livros.manipularDB.livro, String> colStatus;
-    @FXML private TableColumn<Livros.manipularDB.livro, Integer> colPaginaAtual;
-    @FXML private TableColumn<Livros.manipularDB.livro, Integer> colProgresso;
-    @FXML private TableColumn<Livros.manipularDB.livro, Void> acoes;
+    @FXML private TableView<LivrosSevice.manipularDB.livro> tabela;
+    @FXML private TableColumn<LivrosSevice.manipularDB.livro, String> colTitulo;
+    @FXML private TableColumn<LivrosSevice.manipularDB.livro, String> colDescricao;
+    @FXML private TableColumn<LivrosSevice.manipularDB.livro, Integer> colPaginas;
+    @FXML private TableColumn<LivrosSevice.manipularDB.livro, String> colStatus;
+    @FXML private TableColumn<LivrosSevice.manipularDB.livro, Integer> colPaginaAtual;
+    @FXML private TableColumn<LivrosSevice.manipularDB.livro, Integer> colProgresso;
+    @FXML private TableColumn<LivrosSevice.manipularDB.livro, Void> acoes;
     @FXML
     private void initialize(){
         configurarColunaAcoes();
@@ -143,7 +143,7 @@ public class TelaPrincipal {
     }
     public void configurarColunaTitulo() {
         colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
-        colTitulo.setCellFactory(column -> new TableCell<Livros.manipularDB.livro, String>() {
+        colTitulo.setCellFactory(column -> new TableCell<LivrosSevice.manipularDB.livro, String>() {
             private final TextField campoTitulo = new TextField();
             {
                 campoTitulo.setOnAction(e -> salvar());
@@ -153,13 +153,13 @@ public class TelaPrincipal {
             }
 
             private void salvar() {
-                Livros.manipularDB.livro livro = getTableRow().getItem();
+                LivrosSevice.manipularDB.livro livro = getTableRow().getItem();
                 if (livro == null) { cancelEdit(); return; }
 
                 String novo = campoTitulo.getText();
 
                 try {
-                    Livros.manipularDB.editarTitulo(livro.getId(), novo);
+                    LivrosSevice.manipularDB.editarTitulo(livro.getId(), novo);
                     livro.setTitulo(novo);
                     commitEdit(novo);
                 } catch (SQLException ex) {
@@ -205,7 +205,7 @@ public class TelaPrincipal {
     }
     public void configurarColunaDescricao() {
         colDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
-        colDescricao.setCellFactory(column -> new TableCell<Livros.manipularDB.livro, String>() {
+        colDescricao.setCellFactory(column -> new TableCell<LivrosSevice.manipularDB.livro, String>() {
             private final TextField campoDesc = new TextField();
             {
                 campoDesc.setOnAction(e -> salvar());
@@ -215,13 +215,13 @@ public class TelaPrincipal {
             }
 
             private void salvar() {
-                Livros.manipularDB.livro livro = getTableRow().getItem();
+                LivrosSevice.manipularDB.livro livro = getTableRow().getItem();
                 if (livro == null) { cancelEdit(); return; }
 
                 String novo = campoDesc.getText();
 
                 try {
-                    Livros.manipularDB.editarDesricao(livro.getId(), novo);
+                    LivrosSevice.manipularDB.editarDesricao(livro.getId(), novo);
                     livro.setDescricao(novo);
                     commitEdit(novo);
                 } catch (SQLException ex) {
@@ -267,7 +267,7 @@ public class TelaPrincipal {
     }
     public void configurarColunaPagTotal() {
         colPaginas.setCellValueFactory(new PropertyValueFactory<>("total_pag"));
-        colPaginas.setCellFactory(column -> new TableCell<Livros.manipularDB.livro, Integer>() {
+        colPaginas.setCellFactory(column -> new TableCell<LivrosSevice.manipularDB.livro, Integer>() {
             private final TextField campoPaginas = new TextField();
             {
                 campoPaginas.setOnAction(e -> salvar());
@@ -276,7 +276,7 @@ public class TelaPrincipal {
                 });
             }
             private void salvar() {
-                Livros.manipularDB.livro livro = getTableRow().getItem();
+                LivrosSevice.manipularDB.livro livro = getTableRow().getItem();
                 if (livro == null) { cancelEdit(); return; }
 
                 String novo = campoPaginas.getText();
@@ -287,7 +287,7 @@ public class TelaPrincipal {
                     if(pg_str.isEmpty()){
                         pg_total = 0;
                     }
-                    else if (!(Livros.manipularDB.eNumero(pg_str))){
+                    else if (!(LivrosSevice.manipularDB.eNumero(pg_str))){
                         alert("Total de paginas invalido!");
                         return;
                     }
@@ -295,7 +295,7 @@ public class TelaPrincipal {
                         pg_total = Integer.parseInt(pg_str);
                     }
 
-                    Livros.manipularDB.editarPagTotal(livro.getId(), pg_total);
+                    LivrosSevice.manipularDB.editarPagTotal(livro.getId(), pg_total);
                     livro.setTotal_pag(pg_total);
                     commitEdit(pg_total);
                     tabela.refresh();
@@ -345,7 +345,7 @@ public class TelaPrincipal {
     }
     public void configurarColunaPagAtual() {
         colPaginaAtual.setCellValueFactory(new PropertyValueFactory<>("paginaAtual"));
-        colPaginaAtual.setCellFactory(column -> new TableCell<Livros.manipularDB.livro, Integer>() {
+        colPaginaAtual.setCellFactory(column -> new TableCell<LivrosSevice.manipularDB.livro, Integer>() {
             private final TextField campoPaginaAtual = new TextField();
             {
                 campoPaginaAtual.setOnAction(e -> salvar());
@@ -354,7 +354,7 @@ public class TelaPrincipal {
                 });
             }
             private void salvar() {
-                Livros.manipularDB.livro livro = getTableRow().getItem();
+                LivrosSevice.manipularDB.livro livro = getTableRow().getItem();
                 if (livro == null) { cancelEdit(); return; }
                 try {
                     String pg_str = campoPaginaAtual.getText();
@@ -362,7 +362,7 @@ public class TelaPrincipal {
                     if(pg_str.isEmpty()){
                         pg_atual = 0;
                     }
-                    else if (!(Livros.manipularDB.eNumero(pg_str))){
+                    else if (!(LivrosSevice.manipularDB.eNumero(pg_str))){
                         alert("Total de paginas invalido!");
                         return;
                     }
@@ -370,7 +370,7 @@ public class TelaPrincipal {
                         pg_atual = Integer.parseInt(pg_str);
                     }
 
-                    Livros.manipularDB.editarPagAtual(livro.getId(), pg_atual);
+                    LivrosSevice.manipularDB.editarPagAtual(livro.getId(), pg_atual);
                     livro.setPaginaAtual(pg_atual);
                     commitEdit(pg_atual);
                     tabela.refresh();
@@ -420,7 +420,7 @@ public class TelaPrincipal {
     }
     public void configurarColunaProgresso(){
         colProgresso.setCellValueFactory(cd -> new ReadOnlyObjectWrapper<>(0));
-        colProgresso.setCellFactory(col -> new TableCell<Livros.manipularDB.livro, Integer>() {
+        colProgresso.setCellFactory(col -> new TableCell<LivrosSevice.manipularDB.livro, Integer>() {
             private final Label prog = new Label();
             private final ProgressBar barraProg = new ProgressBar();
             private final HBox caixa = new HBox(10, barraProg, prog);
@@ -431,11 +431,11 @@ public class TelaPrincipal {
                     setGraphic(null);
                     return;
                 }
-                Livros.manipularDB.livro livro_progresso = getTableRow().getItem();
+                LivrosSevice.manipularDB.livro livro_progresso = getTableRow().getItem();
                 int id = livro_progresso.getId();
 
                 try {
-                    double numeroProgresso = Livros.manipularDB.calcularProgresso(id);
+                    double numeroProgresso = LivrosSevice.manipularDB.calcularProgresso(id);
                     prog.setText(String.format("%.0f%%", numeroProgresso));
                     barraProg.setProgress(numeroProgresso/100);
 
@@ -449,7 +449,7 @@ public class TelaPrincipal {
     }
     public void configurarColunaStatus() {
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
-        colStatus.setCellFactory(column -> new TableCell<Livros.manipularDB.livro, String>() {
+        colStatus.setCellFactory(column -> new TableCell<LivrosSevice.manipularDB.livro, String>() {
             ObservableList<String> items = FXCollections.observableArrayList("Quero ler", "Lendo", "Pausado", "Lido", "Abandonado");
             private final ComboBox<String> campoStatus = new ComboBox<>(items);
             {
@@ -459,13 +459,13 @@ public class TelaPrincipal {
                 });
             }
             private void salvar() {
-                Livros.manipularDB.livro livro = getTableRow().getItem();
+                LivrosSevice.manipularDB.livro livro = getTableRow().getItem();
                 int id = livro.getId();
                 if (livro == null) { cancelEdit(); return; }
                 try {
                     String status = campoStatus.getValue();
                     String statusDB = exibirStatusParaDB(status);
-                    Livros.manipularDB.editarStatus(id, statusDB);
+                    LivrosSevice.manipularDB.editarStatus(id, statusDB);
                     livro.setStatus(statusDB);
                     commitEdit(statusDB);
                 }
@@ -549,10 +549,10 @@ public class TelaPrincipal {
                     setText(null);
                 }
                 btnApagar.setOnAction(event -> {
-                    Livros.manipularDB.livro livro_apagar = getTableView().getItems().get(getIndex());
+                    LivrosSevice.manipularDB.livro livro_apagar = getTableView().getItems().get(getIndex());
                     int id = livro_apagar.getId();
                     try {
-                        Livros.manipularDB.deletar_livro(id);
+                        LivrosSevice.manipularDB.deletar_livro(id);
                         getTableView().getItems().remove(livro_apagar);
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
@@ -565,7 +565,7 @@ public class TelaPrincipal {
     private void carregarTab(){
 
         try {
-            tabela.setItems(FXCollections.observableList(Livros.manipularDB.listarMeusLivros()));
+            tabela.setItems(FXCollections.observableList(LivrosSevice.manipularDB.listarMeusLivros()));
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,4 +1,4 @@
-package ui;
+package controller;
 
 
 import javafx.event.ActionEvent;
@@ -8,8 +8,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import service.Contas;
-import java.awt.*;
+import service.ContasService;
+
 import java.sql.SQLException;
 
 public class TelaCadastro {
@@ -35,12 +35,12 @@ public class TelaCadastro {
             alert("Preencha email e senha.");
             return;
         }
-        if (Contas.manipularDB.verificarContaExiste(email)){
+        if (ContasService.manipularDB.verificarContaExiste(email)){
             alert("Essa conta já existe, use outro email.");
             return;
         }
         try{
-            service.Contas.manipularDB.add_usuario(nome, email, senha);
+            ContasService.manipularDB.add_usuario(nome, email, senha);
             alert("Conta criada com sucesso! voltando a tela de login");
             abrirLogin(event);
         }

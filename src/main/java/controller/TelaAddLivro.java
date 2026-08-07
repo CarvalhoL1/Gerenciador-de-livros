@@ -1,4 +1,4 @@
-package ui;
+package controller;
 
 
 import javafx.event.ActionEvent;
@@ -7,10 +7,9 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import service.Livros;
+import service.LivrosSevice;
 import service.Sessao;
 
-import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -39,7 +38,7 @@ public class TelaAddLivro {
         if(pag_str.isEmpty()){
             paginas = 0;
         }
-        else if (!(Livros.manipularDB.eNumero(pag_str))){
+        else if (!(LivrosSevice.manipularDB.eNumero(pag_str))){
             alert("Total de paginas invalido!");
             return;
         }
@@ -52,11 +51,11 @@ public class TelaAddLivro {
         }
         try{
             if(descricao.isEmpty()) {
-                    service.Livros.manipularDB.add_livro(titulo, "", paginas);
+                    LivrosSevice.manipularDB.add_livro(titulo, "", paginas);
 
             }
             else{
-                service.Livros.manipularDB.add_livro(titulo, descricao, paginas);
+                LivrosSevice.manipularDB.add_livro(titulo, descricao, paginas);
             }
             alert("Livro adicionado com sucesso!");
             tituloCampo.clear();

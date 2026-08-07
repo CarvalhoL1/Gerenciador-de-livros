@@ -1,25 +1,24 @@
-package ui;
+package controller;
 
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
-import javafx.scene.control.TextField;
+import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
-import service.Contas;
-import service.Contas.*;
-import service.Contas.manipularDB.Usuario;
+import service.ContasService;
+import service.ContasService.manipularDB.Usuario;
 import service.Sessao;
 
-import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class TelaNome {
-
+public class TelaSenha {
     @FXML
-    private TextField nomeCampo;
+    private PasswordField senhaAntigaCampo;
+    @FXML
+    private PasswordField senhaNovaCampo;
 
     private void alert(String mensagem) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -28,16 +27,20 @@ public class TelaNome {
     }
 
     @FXML
-    private void mudarNome(ActionEvent event) throws SQLException, IOException{
-        String nome = nomeCampo.getText().trim();
+    private void mudarSenha(ActionEvent event) throws SQLException, IOException{
+        String senhaAntiga = senhaAntigaCampo.getText().trim();
+        String senhaNova = senhaNovaCampo.getText().trim();
         Usuario u = Sessao.usuarioLogado;
-        if (!nome.isEmpty()) {
-            Contas.manipularDB.EditarNome(u.getEmail(), nome);
-            alert("Nome alterado com sucesso, voltando a tela principal!");
+        if (ContasService.manipularDB.autenticar(senhaAntiga, u.getId()) && !senhaNova.isEmpty()) {
+            ContasService.manipularDB.EditarSenha(u.getEmail(), senhaNova);
+            alert("Senha alterada com sucesso, voltando a tela principal!");
             voltar(event);
         }
+        else if (senhaNova.isEmpty()){
+            alert("Digite a nova senha!");
+        }
         else {
-            alert("Preencha o nome!");
+            alert("Senha antiga incorreta!");
         }
     }
 

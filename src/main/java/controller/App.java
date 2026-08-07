@@ -1,11 +1,14 @@
-package ui;
+package controller;
 
 import db.CriarDB;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {

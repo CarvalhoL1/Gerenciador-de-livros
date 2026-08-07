@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" prefHeight="500" prefWidth="950" spacing="12" styleClass="vbox" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.TelaSenha">
+<VBox alignment="CENTER" prefHeight="500" prefWidth="950" spacing="12" styleClass="vbox" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaSenha">
     <children>
         <VBox alignment="CENTER" maxWidth="300" styleClass="card">
             <Button mnemonicParsing="false" onAction="#voltar" text="Voltar" />

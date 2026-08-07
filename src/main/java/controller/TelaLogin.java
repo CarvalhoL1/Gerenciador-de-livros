@@ -1,4 +1,4 @@
-package ui;
+package controller;
 
 import service.*;
 import javafx.event.ActionEvent;
@@ -14,17 +14,6 @@ import javafx.stage.Stage;
 import java.sql.SQLException;
 
 public class TelaLogin {
-    @FXML
-    private TextField emailCampo;
-
-    @FXML
-    private PasswordField senhaCampo;
-
-    private void alert(String mensagem) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText(mensagem);
-        alert.showAndWait();
-    }
 
     @FXML
     private void fazerLogin(ActionEvent event){
@@ -37,7 +26,7 @@ public class TelaLogin {
         }
 
         try {
-            Contas.manipularDB.Usuario u = Contas.manipularDB.login(email, senha);
+            ContasService.manipularDB.Usuario u = ContasService.manipularDB.login(email, senha);
 
             if (u != null) {
                 alert("Bem-vindo, " + u.getNome() + "!");
