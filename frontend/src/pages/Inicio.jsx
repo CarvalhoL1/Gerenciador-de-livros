@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ModalAddLivro from './components/ModalAddLivro';
 import api from '../api';
 
 function Inicio() {
     const [livros, setLivros] = useState([]);
     const [mensagem, setMensagem] = useState('');
     const navigate = useNavigate();
-
+    const [modalAberto, setModalAberto] = useState(false);
+    const abrirModalAddLivro = () => setModalAberto(true);
     useEffect(() => {
         carregarLivros();
     }, []);
@@ -26,14 +28,10 @@ function Inicio() {
         navigate('/login');
     };
 
-    const abrirAddLivro = () => {
-        navigate('/livros/cadastrar');
-    };
 
     const apagarConta = async () => {
         if (window.confirm("Tem certeza que deseja apagar sua conta?")) {
             try {
-
                 await api.delete('/usuarios/deletar');
                 handleLogout();
             } catch (err) {
@@ -75,7 +73,7 @@ function Inicio() {
                             <td>{livro.descricao}</td>
                             <td>{livro.totalPaginas}</td>
                             <td>{livro.pagAtual}</td>
-                            <td>{/* Cálculo de % lida */} {Math.round((livro.pagAtual / livro.totalPaginas) * 100)}%</td>
+                            <td> {totalPaginas != 0 ? Math.round((livro.pagAtual / livro.totalPaginas) * 100) : 0}%</td>
                             <td>{livro.status}</td>
                             <td>
                                 <button onClick={() => alert(`Editar livro ${livro.id}`)}>Editar</button>
@@ -91,12 +89,16 @@ function Inicio() {
             </table>
 
             <div style={{ display: 'flex', gap: '10px' }}>
-                <button onClick={abrirAddLivro}>Cadastrar novo livro</button>
+                <button onClick={abrirModalAddLivro}>Cadastrar novo livro</button>
                 <button onClick={apagarConta} style={{ color: 'red' }}>Apagar conta</button>
                 <button onClick={() => navigate('/alterar-nome')}>Alterar nome</button>
                 <button onClick={() => navigate('/alterar-senha')}>Alterar senha</button>
             </div>
-
+            <ModalAddLivro
+                aberto={modalAberto}
+                onFechar={() => setModalAberto(false)}
+                onLivroAdicionado={carregarLivros}
+            />
         </div>
     );
 }

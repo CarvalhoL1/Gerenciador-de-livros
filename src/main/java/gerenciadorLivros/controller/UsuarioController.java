@@ -5,6 +5,7 @@ import gerenciadorLivros.dto.AlterarSenhaRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import gerenciadorLivros.service.ContasService;
 import java.sql.SQLException;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 public class UsuarioController {
     private final ContasService contasService;
 
