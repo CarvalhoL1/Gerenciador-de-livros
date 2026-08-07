@@ -31,7 +31,7 @@ public class RepositorioUsuario implements IRepositorioUsuario{
     }
 
     @Override
-    public Usuario login(String email, String senha, int id) throws SQLException{
+    public Usuario login(String email, String senha) throws SQLException{
         String selectSQL = "SELECT id, nome, email, senha_hash FROM usuarios WHERE email = ?";
 
         try (Connection connection = Conectar.getConnection();
@@ -42,8 +42,8 @@ public class RepositorioUsuario implements IRepositorioUsuario{
 
 
             if (!rs.next()) return null;
-
-            if (!autenticar(senha, id)) {
+            String senhaHash = rs.getString("senha_hash");
+            if (!BCrypt.checkpw(senha, senhaHash)) {
                 return null;
             }
 

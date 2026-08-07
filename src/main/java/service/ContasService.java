@@ -4,19 +4,14 @@ import java.sql.SQLException;
 import dados.IRepositorioUsuario;
 import dados.RepositorioUsuario;
 import model.Usuario;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ContasService {
-    private static ContasService instance;
     private final IRepositorioUsuario repositorioUsuario;
 
-    private ContasService(){
-        this.repositorioUsuario = new RepositorioUsuario();
-    }
-    public static synchronized ContasService getInstance(){
-        if(instance == null){
-            instance = new ContasService();
-        }
-        return instance;
+    public ContasService(IRepositorioUsuario repositorioUsuario) {
+        this.repositorioUsuario = repositorioUsuario;
     }
 
     public void add_usuario(String nome, String email, String senha) throws SQLException{
@@ -26,8 +21,8 @@ public class ContasService {
         repositorioUsuario.add_usuario(nome, email, senha);
     }
 
-    public Usuario login(String email, String senha, int id) throws SQLException{
-        return repositorioUsuario.login(email, senha, id);
+    public Usuario login(String email, String senha) throws SQLException{
+        return repositorioUsuario.login(email, senha);
     }
 
     public void deletar_conta(String email) throws SQLException {
