@@ -1,7 +1,7 @@
-package dados;
+package gerenciadorLivros.dados;
 
-import db.Conectar;
-import model.Livro;
+import gerenciadorLivros.db.Conectar;
+import gerenciadorLivros.model.Livro;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

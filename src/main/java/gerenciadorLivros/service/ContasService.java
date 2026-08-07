@@ -1,9 +1,8 @@
-package service;
+package gerenciadorLivros.service;
 
 import java.sql.SQLException;
-import dados.IRepositorioUsuario;
-import dados.RepositorioUsuario;
-import model.Usuario;
+import gerenciadorLivros.dados.IRepositorioUsuario;
+import gerenciadorLivros.model.Usuario;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,7 +13,7 @@ public class ContasService {
         this.repositorioUsuario = repositorioUsuario;
     }
 
-    public void add_usuario(String nome, String email, String senha) throws SQLException{
+    public void cadastro(String nome, String email, String senha) throws SQLException{
         if(nome.isBlank() || email.isBlank() || senha.isBlank()){
             throw new IllegalArgumentException("Cadastro Invalido");
         }
@@ -25,7 +24,7 @@ public class ContasService {
         return repositorioUsuario.login(email, senha);
     }
 
-    public void deletar_conta(String email) throws SQLException {
+    public void deletarConta(String email) throws SQLException {
         if(email.isBlank()) {
            throw new IllegalArgumentException("Conta não encontrada");
         }
@@ -36,18 +35,18 @@ public class ContasService {
         return repositorioUsuario.verificarContaExiste(email);
     }
 
-    public boolean autenticar(String senhaDigitada, int id) throws SQLException {
-        return repositorioUsuario.autenticar(senhaDigitada, id);
+    public boolean autenticar(String senhaDigitada, String email) throws SQLException {
+        return repositorioUsuario.autenticar(senhaDigitada, email);
     }
 
-    public void EditarSenha(String email, String senha_nova) throws SQLException {
+    public void editarSenha(String email, String senha_nova) throws SQLException {
         if (email.isBlank() || senha_nova.isBlank()) {
             throw new IllegalArgumentException("Email ou senha invalida");
         }
         repositorioUsuario.EditarSenha(email, senha_nova);
     }
 
-    public void EditarNome(String email, String nome_novo) throws SQLException {
+    public void editarNome(String email, String nome_novo) throws SQLException {
         if (email.isBlank() || nome_novo.isBlank()) {
             throw new IllegalArgumentException("Email ou senha invalida");
         }

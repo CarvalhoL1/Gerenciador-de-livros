@@ -1,10 +1,9 @@
-package dados;
+package gerenciadorLivros.dados;
 
-import db.Conectar;
-import model.Usuario;
+import gerenciadorLivros.db.Conectar;
+import gerenciadorLivros.model.Usuario;
 import org.mindrot.jbcrypt.BCrypt;
-import service.ContasService;
-import service.ProtedorSenhas;
+import gerenciadorLivros.service.ProtedorSenhas;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -95,11 +94,11 @@ public class RepositorioUsuario implements IRepositorioUsuario{
     }
 
     @Override
-    public boolean autenticar (String senhaDigitada, int id){
-        String sql = "SELECT senha_hash FROM usuarios WHERE id = ?";
+    public boolean autenticar (String senhaDigitada, String email){
+        String sql = "SELECT senha_hash FROM usuarios WHERE email = ?";
         try (Connection conn = Conectar.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, id);
+            stmt.setString(1, email);
             try (ResultSet rs = stmt.executeQuery()) {
                 String senhaHash = rs.getString("senha_hash");
                 //Usa a função de conferir senhas comparando a senha fornecida pelo usuario com aultilizada no banco

@@ -1,6 +1,6 @@
-package dados;
+package gerenciadorLivros.dados;
 
-import model.Livro;
+import gerenciadorLivros.model.Livro;
 
 import java.sql.SQLException;
 import java.util.List;

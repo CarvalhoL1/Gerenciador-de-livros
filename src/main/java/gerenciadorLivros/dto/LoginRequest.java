@@ -1,4 +1,4 @@
-package dto;
+package gerenciadorLivros.dto;
 
 import jakarta.validation.constraints.NotBlank;
 

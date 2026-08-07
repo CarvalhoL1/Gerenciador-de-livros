@@ -1,7 +1,6 @@
-package dados;
+package gerenciadorLivros.dados;
 
-import model.Usuario;
-import service.ContasService;
+import gerenciadorLivros.model.Usuario;
 
 import java.sql.SQLException;
 
@@ -11,7 +10,7 @@ public interface IRepositorioUsuario {
     Usuario login(String email, String senha) throws SQLException;
     void deletar_conta(String email) throws SQLException;
     boolean verificarContaExiste(String email) throws SQLException;
-    boolean autenticar (String senhaDigitada, int id) throws SQLException;
+    boolean autenticar (String senhaDigitada, String email) throws SQLException;
     String EditarSenha(String email, String senha_nova) throws SQLException;
     String EditarNome(String email, String nome_novo) throws SQLException;
 }

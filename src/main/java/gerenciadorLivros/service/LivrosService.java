@@ -1,8 +1,8 @@
-package service;
+package gerenciadorLivros.service;
 
-import dados.IRepositorioLivro;
-import dados.RepositorioLivro;
-import model.Livro;
+import gerenciadorLivros.dados.IRepositorioLivro;
+import gerenciadorLivros.dados.RepositorioLivro;
+import gerenciadorLivros.model.Livro;
 import java.sql.SQLException;
 import java.util.List;
 

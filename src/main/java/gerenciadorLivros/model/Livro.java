@@ -1,4 +1,4 @@
-package model;
+package gerenciadorLivros.model;
 
 public class Livro {
     int id;

@@ -20,8 +20,8 @@ hs_err_pid*
 replay_pid*
 
 
-# Banco de dados local
-*.db
+# Banco de gerenciadorLivros.dados local
+*.gerenciadorLivros.db
 *.sqlite
 *.sqlite3
 

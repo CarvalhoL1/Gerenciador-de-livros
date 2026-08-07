@@ -1,7 +1,5 @@
-package service;
-import dados.IRepositorioUsuario;
-import dados.RepositorioUsuario;
-import model.Usuario;
+package gerenciadorLivros.service;
+import gerenciadorLivros.model.Usuario;
 
 public class SessaoService {
     private static Usuario usuarioLogado;

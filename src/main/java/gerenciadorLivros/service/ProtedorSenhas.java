@@ -1,4 +1,4 @@
-package service;
+package gerenciadorLivros.service;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class ProtedorSenhas {

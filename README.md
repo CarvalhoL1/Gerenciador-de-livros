@@ -18,7 +18,7 @@ Aplicação desktop desenvolvida em **Java** com **JavaFX** para gerenciamento d
      -  Concluído  
 
 - Interface gráfica estilizada com CSS  
-- Dados salvos em banco de dados **SQLite**
+- Dados salvos em banco de gerenciadorLivros.dados **SQLite**
 
 ---
 
@@ -26,8 +26,8 @@ Aplicação desktop desenvolvida em **Java** com **JavaFX** para gerenciamento d
 
 - **Java 17+**
 - **JavaFX (interface)**
-- **SQLite (Banco de dados)**
-- **JDBC (Conexão com banco de dados)**
+- **SQLite (Banco de gerenciadorLivros.dados)**
+- **JDBC (Conexão com banco de gerenciadorLivros.dados)**
 - **FXML (Scene Builder)**
 - **jBCrypt (Hash seguro de senhas)**
 - **CSS (Estilização da interface)**
@@ -41,8 +41,8 @@ src
  ├─ main
  │   ├─ java
  │   │   ├─ ui                → Telas e controllers JavaFX
- │   │   ├─ service           → Regras de negócio
- │   │   └─ db                → Conexão e criação do banco
+ │   │   ├─ gerenciadorLivros.service           → Regras de negócio
+ │   │   └─ gerenciadorLivros.db                → Conexão e criação do banco
  │   │
  │   └─ resources
  │       ├─ ui                → Arquivos FXML
@@ -54,7 +54,7 @@ src
 
 ## Banco de Dados
 
-O sistema utiliza **SQLite**, criando automaticamente o arquivo **base.db**
+O sistema utiliza **SQLite**, criando automaticamente o arquivo **base.gerenciadorLivros.db**
 
 
 ### Tabelas principais
@@ -90,9 +90,9 @@ git clone https://github.com/seu-usuario/seu-repo.git
    - JDK 17 ou superior
    - JavaFX configurado no projeto
 
-4. Execute a classe principal (Main/App)
+4. Execute a classe principal (Main/gerenciadorLivros.App)
 
-O banco de dados será criado automaticamente na primeira execução.
+O banco de gerenciadorLivros.dados será criado automaticamente na primeira execução.
 
 ---
 
