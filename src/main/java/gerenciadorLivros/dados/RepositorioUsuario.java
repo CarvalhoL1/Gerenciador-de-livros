@@ -4,12 +4,14 @@ import gerenciadorLivros.db.Conectar;
 import gerenciadorLivros.model.Usuario;
 import org.mindrot.jbcrypt.BCrypt;
 import gerenciadorLivros.service.ProtedorSenhas;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Repository
 public class RepositorioUsuario implements IRepositorioUsuario{
 
     @Override

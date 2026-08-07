@@ -1,10 +1,12 @@
 package gerenciadorLivros.dados;
 
 import gerenciadorLivros.model.Livro;
+import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
 import java.util.List;
 
+@Repository
 public interface IRepositorioLivro {
     void add_livro(Livro livro, int id) throws SQLException;
     void deletar_livro(int id) throws SQLException;

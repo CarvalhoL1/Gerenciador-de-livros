@@ -1,10 +1,11 @@
 package gerenciadorLivros.dados;
 
 import gerenciadorLivros.model.Usuario;
+import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
 
-
+@Repository
 public interface IRepositorioUsuario {
     void add_usuario(String nome, String email, String senha) throws SQLException;
     Usuario login(String email, String senha) throws SQLException;

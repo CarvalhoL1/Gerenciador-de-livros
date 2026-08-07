@@ -3,24 +3,20 @@ package gerenciadorLivros.service;
 import gerenciadorLivros.dados.IRepositorioLivro;
 import gerenciadorLivros.dados.RepositorioLivro;
 import gerenciadorLivros.model.Livro;
+import org.springframework.stereotype.Service;
+
 import java.sql.SQLException;
 import java.util.List;
 
+@Service
 public class LivrosService {
-    private static LivrosService instance;
     private final IRepositorioLivro repositorioLivro;
 
-    private LivrosService(){
-        this.repositorioLivro = new RepositorioLivro();
-    }
-    public static synchronized LivrosService getInstance(){
-        if(instance == null){
-            instance = new LivrosService();
-        }
-        return instance;
+    public LivrosService(IRepositorioLivro repositorioLivro){
+        this.repositorioLivro = repositorioLivro;
     }
 
-    public void add_livro(String titulo, String descricao, int total_pag, int idUsuario) throws SQLException {
+    public void addLivro(String titulo, String descricao, int total_pag, int idUsuario) throws SQLException {
         if (titulo.isBlank()){
             throw  new IllegalArgumentException("Titulo não pode ser nulo");
         }

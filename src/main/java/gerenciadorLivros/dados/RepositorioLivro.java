@@ -2,6 +2,8 @@ package gerenciadorLivros.dados;
 
 import gerenciadorLivros.db.Conectar;
 import gerenciadorLivros.model.Livro;
+import org.springframework.stereotype.Repository;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class RepositorioLivro implements IRepositorioLivro {
 
     public void add_livro(Livro livro, int id) throws SQLException {
