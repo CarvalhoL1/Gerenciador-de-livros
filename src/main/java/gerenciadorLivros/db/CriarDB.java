@@ -15,6 +15,7 @@ public class CriarDB {
              Statement statement = connection.createStatement()) {
 
             statement.executeUpdate(sql);
+            System.out.println("Tabela usuarios verificada/criada com sucesso!");
         } catch (SQLException e) {
             System.out.println("Erro ao criar tabela: " + e.getMessage());
 
@@ -33,9 +34,9 @@ public class CriarDB {
                 "atualizado_em TEXT DEFAULT (datetime('now'))," +
                 "FOREIGN KEY(id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE);";
         try (Connection connection = Conectar.getConnection();
-             Statement statement = connection.createStatement()) {
-
+            Statement statement = connection.createStatement()) {
             statement.executeUpdate(sql);
+            System.out.println("Tabela livros verificada/criada com sucesso!");
         } catch (SQLException e) {
             System.out.println("Erro ao criar tabela: " + e.getMessage());
 

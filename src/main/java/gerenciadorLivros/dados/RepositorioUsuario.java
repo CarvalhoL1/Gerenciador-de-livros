@@ -26,9 +26,6 @@ public class RepositorioUsuario implements IRepositorioUsuario{
 
             pstmt.executeUpdate();
         }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

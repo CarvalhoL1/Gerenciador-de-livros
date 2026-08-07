@@ -1,30 +1,34 @@
 package gerenciadorLivros.service;
+
 import gerenciadorLivros.model.Usuario;
+import org.springframework.stereotype.Service;
 
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+
+@Service
 public class SessaoService {
-    private static Usuario usuarioLogado;
+    private final Map<String, Usuario> sessoesAtivas = new ConcurrentHashMap<>();
 
-    private SessaoService() {}
-
-    public static void login(Usuario usuario) {
+    public String criarSessao(Usuario usuario) {
         if (usuario == null) {
             throw new IllegalArgumentException("Usuario nulo");
         }
-        usuarioLogado = usuario;
+        String token = UUID.randomUUID().toString();
+        sessoesAtivas.put(token, usuario);
+        return token;
     }
 
-    public static void logout() {
-        usuarioLogado = null;
+    public Usuario buscarPorToken(String token) {
+        return sessoesAtivas.get(token);
     }
 
-    public static boolean isLogado() {
-        return usuarioLogado != null;
+    public boolean tokenValido(String token) {
+        return sessoesAtivas.containsKey(token);
     }
 
-    public static Usuario getUsuarioLogado() {
-        if (usuarioLogado == null) {
-            throw new IllegalStateException("Nenhum usuario logado");
-        }
-        return usuarioLogado;
+    public void logout(String token) {
+        sessoesAtivas.remove(token);
     }
 }
