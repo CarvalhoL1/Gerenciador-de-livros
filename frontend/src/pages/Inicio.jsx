@@ -1,22 +1,39 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ModalAddLivro from './components/ModalAddLivro';
-import api from '../api';
+import ModalAlterarNome from "./components/ModalAlterarNome";
 import ModalAlterarSenha from "./components/ModalAlterarSenha";
+
+import api from '../api';
+
 
 function Inicio() {
     const [livros, setLivros] = useState([]);
     const [mensagem, setMensagem] = useState('');
+    const [nome, setNome] = useState('');
     const navigate = useNavigate();
 
-    const [modalAddLivro, setModalAddLivroo] = useState(false);
-    const abrirModalAddLivro = () => setModalAddLivroo(true);
+    const [modalAddLivro, setModalAddLivro] = useState(false);
+    const abrirModalAddLivro = () => setModalAddLivro(true);
+
+    const [modalAlterarNome, setModalAlterarNome] = useState(false);
+    const abrirModalAlterarNome = () => setModalAlterarNome(true);
 
     const [modalAlterarSenha, setModalAlterarSenha] = useState(false)
     const abrirModalAlterarSenha = () => setModalAlterarSenha(true);
     useEffect(() => {
         carregarLivros();
+        carregarPerfil();
     }, []);
+
+    const carregarPerfil = async () => {
+        try {
+            const response = await api.get('/usuarios/eu');
+            setNome(response.data.nome);
+        } catch (err) {
+            console.error("Erro ao buscar perfil:", err);
+        }
+    };
 
     const carregarLivros = async () => {
         try {
@@ -35,13 +52,15 @@ function Inicio() {
 
 
     const apagarConta = async () => {
-        if (window.confirm("Tem certeza que deseja apagar sua conta?")) {
-            try {
-                await api.delete('/usuarios/deletar');
-                handleLogout();
-            } catch (err) {
-                console.error("Erro ao apagar conta:", err);
-            }
+        const confirmou = window.confirm("Tem certeza que deseja apagar sua conta?");
+        if (!confirmou) return;
+        const senha = window.prompt("Digite sua senha para confirmar:");
+        if (!senha) return;
+        try {
+            await api.post('/usuarios/deletar', {  senha  });
+            handleLogout();
+        } catch (err) {
+            alert('Senha incorreta.');
         }
     };
 
@@ -51,7 +70,7 @@ function Inicio() {
                 <button onClick={handleLogout} style={{ fontWeight: 'bold' }}>
                     Logout
                 </button>
-
+                <span style={{ color: 'blue' }}>Bem vindo/a, {nome}</span>
                 <span style={{ color: 'blue' }}>{mensagem}</span>
 
                 <span style={{ fontStyle: 'italic', color: '#666' }}>
@@ -96,7 +115,7 @@ function Inicio() {
             <div style={{ display: 'flex', gap: '10px' }}>
                 <button onClick={abrirModalAddLivro}>Cadastrar novo livro</button>
                 <button onClick={apagarConta} style={{ color: 'red' }}>Apagar conta</button>
-                <button onClick={() => navigate('/alterar-nome')}>Alterar nome</button>
+                <button onClick={abrirModalAlterarNome}>Alterar nome</button>
                 <button onClick={abrirModalAlterarSenha}>Alterar senha</button>
             </div>
             <ModalAddLivro
@@ -104,9 +123,17 @@ function Inicio() {
                 onFechar={() => setModalAddLivro(false)}
                 onLivroAdicionado={carregarLivros}
             />
+            <ModalAlterarNome
+                aberto={modalAlterarNome}
+                onFechar={() => {
+                    setModalAlterarNome(false)
+                    carregarPerfil()
+                }
+            }
+            />
             <ModalAlterarSenha
                 aberto={modalAlterarSenha}
-                onFechar={() => setModalAddLivro(false)}
+                onFechar={() => setModalAlterarSenha(false)}
             />
         </div>
     );
