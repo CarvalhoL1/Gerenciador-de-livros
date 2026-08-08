@@ -1,0 +1,17 @@
+package gerenciadorLivros.dados;
+
+import gerenciadorLivros.model.Usuario;
+import org.springframework.stereotype.Repository;
+
+import java.sql.SQLException;
+
+@Repository
+public interface IRepositorioUsuario {
+    void add_usuario(String nome, String email, String senha) throws SQLException;
+    Usuario login(String email, String senha) throws SQLException;
+    void deletar_conta(String email) throws SQLException;
+    boolean verificarContaExiste(String email) throws SQLException;
+    boolean autenticar (String senhaDigitada, String email) throws SQLException;
+    String EditarSenha(String email, String senha_nova) throws SQLException;
+    String EditarNome(String email, String nome_novo) throws SQLException;
+}

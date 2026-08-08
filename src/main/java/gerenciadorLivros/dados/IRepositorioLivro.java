@@ -1,0 +1,20 @@
+package gerenciadorLivros.dados;
+
+import gerenciadorLivros.model.Livro;
+import org.springframework.stereotype.Repository;
+
+import java.sql.SQLException;
+import java.util.List;
+
+@Repository
+public interface IRepositorioLivro {
+    void add_livro(Livro livro, int id) throws SQLException;
+    void deletar_livro(int id) throws SQLException;
+    void editarTitulo(int id, String titulo) throws SQLException;
+    void editarDesricao(int id, String desc) throws SQLException;
+    void editarPagTotal(int id, Integer pg) throws SQLException;
+    void editarPagAtual(int id, Integer pg) throws SQLException;
+    void editarStatus(int id, String status) throws SQLException;
+    double calcularProgresso(int id) throws SQLException;
+    List<Livro> listarMeusLivros(int id) throws SQLException;
+}

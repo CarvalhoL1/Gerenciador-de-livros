@@ -9,6 +9,12 @@
     <artifactId>gerenciador-livros</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>4.1.0</version>
+    </parent>
+
     <properties>
         <maven.compiler.release>21</maven.compiler.release>
         <javafx.version>21.0.4</javafx.version>
@@ -16,6 +22,14 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.mindrot</groupId>
             <artifactId>jbcrypt</artifactId>
@@ -57,7 +71,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>ui.App</mainClass>
+                    <mainClass>gerenciadorLivros.App</mainClass>
                 </configuration>
             </plugin>
         </plugins>
