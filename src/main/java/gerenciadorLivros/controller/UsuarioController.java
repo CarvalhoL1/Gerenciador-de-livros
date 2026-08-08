@@ -24,7 +24,7 @@ public class UsuarioController {
 
     @PutMapping("/usuarios/senha")
     public ResponseEntity<?> alterarSenha(@Valid @RequestBody AlterarSenhaRequest request) throws SQLException {
-        boolean senhaAtualCorreta = contasService.autenticar(request.email(), request.senhaAtual());
+        boolean senhaAtualCorreta = contasService.autenticar(request.senhaAtual(), request.email());
         if (!senhaAtualCorreta) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Senha atual incorreta.");
         }

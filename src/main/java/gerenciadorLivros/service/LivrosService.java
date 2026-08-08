@@ -16,11 +16,11 @@ public class LivrosService {
         this.repositorioLivro = repositorioLivro;
     }
 
-    public void addLivro(String titulo, String descricao, int total_pag, int idUsuario) throws SQLException {
+    public void addLivro(String titulo, String descricao, int totalPag, int idUsuario) throws SQLException {
         if (titulo.isBlank()){
             throw  new IllegalArgumentException("Titulo não pode ser nulo");
         }
-        repositorioLivro.add_livro(new Livro(titulo, descricao, total_pag), idUsuario);
+        repositorioLivro.add_livro(new Livro(titulo, descricao, totalPag), idUsuario);
     }
 
     public void deletar_livro(int id) throws SQLException {

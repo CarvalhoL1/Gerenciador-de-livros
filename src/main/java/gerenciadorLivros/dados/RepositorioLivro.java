@@ -21,7 +21,7 @@ public class RepositorioLivro implements IRepositorioLivro {
             pstmt.setInt(1, id);
             pstmt.setString(2, livro.getTitulo());
             pstmt.setString(3, livro.getDescricao());
-            pstmt.setInt(4, livro.getTotal_pag());
+            pstmt.setInt(4, livro.getTotalPag());
 
             pstmt.executeUpdate();
         } catch (SQLException e) {

@@ -8,11 +8,11 @@ public class Livro {
     String status;
     int paginaAtual;
 
-    public Livro(int id, String titulo, String descricao, int total_pag, String status, int paginaAtual) {
+    public Livro(int id, String titulo, String descricao, int totalPag, String status, int paginaAtual) {
         this.id = id;
         this.titulo = titulo;
         this.descricao = descricao;
-        this.total_pag = total_pag;
+        this.total_pag = totalPag;
         this.status = status;
         this.paginaAtual = paginaAtual;
     }
@@ -40,7 +40,7 @@ public class Livro {
         return descricao;
     }
 
-    public int getTotal_pag() {
+    public int getTotalPag() {
         return total_pag;
     }
 

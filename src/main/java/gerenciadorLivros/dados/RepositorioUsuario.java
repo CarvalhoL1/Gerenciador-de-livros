@@ -99,13 +99,11 @@ public class RepositorioUsuario implements IRepositorioUsuario{
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, email);
             try (ResultSet rs = stmt.executeQuery()) {
-                String senhaHash = rs.getString("senha_hash");
-                //Usa a função de conferir senhas comparando a senha fornecida pelo usuario com aultilizada no banco
-                if (BCrypt.checkpw(senhaDigitada, senhaHash)){
-                    return true;
-                }
-                else {
-                    return false;
+                if (rs.next()) {
+                    String senhaHash = rs.getString("senha_hash");
+                    if (senhaHash != null && BCrypt.checkpw(senhaDigitada, senhaHash)) {
+                        return true;
+                    }
                 }
             }
         } catch (SQLException e) {
