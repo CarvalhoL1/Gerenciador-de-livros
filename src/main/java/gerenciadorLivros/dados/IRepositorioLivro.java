@@ -12,8 +12,8 @@ public interface IRepositorioLivro {
     void deletar_livro(int id) throws SQLException;
     void editarTitulo(int id, String titulo) throws SQLException;
     void editarDesricao(int id, String desc) throws SQLException;
-    void editarPagTotal(int id, int pg) throws SQLException;
-    void editarPagAtual(int id, int pg) throws SQLException;
+    void editarPagTotal(int id, Integer pg) throws SQLException;
+    void editarPagAtual(int id, Integer pg) throws SQLException;
     void editarStatus(int id, String status) throws SQLException;
     double calcularProgresso(int id) throws SQLException;
     List<Livro> listarMeusLivros(int id) throws SQLException;

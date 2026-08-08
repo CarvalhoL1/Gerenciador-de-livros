@@ -12,6 +12,13 @@ function Inicio() {
     const [mensagem, setMensagem] = useState('');
     const [nome, setNome] = useState('');
     const navigate = useNavigate();
+    const [editando, setEditando] = useState(null);
+    const [valorEdicao, setValorEdicao] = useState('');
+
+    function iniciarEdicao(livro, campo) {
+        setEditando({ livroId: livro.id, campo });
+        setValorEdicao(livro[campo] ?? '');
+    }
 
     const [modalAddLivro, setModalAddLivro] = useState(false);
     const abrirModalAddLivro = () => setModalAddLivro(true);
@@ -46,10 +53,35 @@ function Inicio() {
     };
     const handleLogout = () => {
         localStorage.removeItem('token');
-        localStorage.removeItem('idUsuario');
         navigate('/login');
     };
 
+    async function salvarEdicao(livro) {
+        const atualizado = { ...livro, [editando.campo]: valorEdicao };
+        try {
+            await api.put(`/livros/${livro.id}`, {
+                titulo: atualizado.titulo,
+                descricao: atualizado.descricao,
+                pagAtual: Number(atualizado.paginaAtual) || 0,
+                pagTotal: atualizado.totalPag ? Number(atualizado.totalPag) : null,
+                status: atualizado.status,
+            });
+            setEditando(null);
+            carregarLivros();
+        } catch (err) {
+            alert('Erro ao salvar edição.');
+        }
+    }
+
+    async function apagarLivro(id) {
+        if (!window.confirm("Apagar este livro?")) return;
+        try {
+            await api.delete(`/livros/${id}`);
+            carregarLivros();
+        } catch (err) {
+            alert('Erro ao apagar livro.');
+        }
+    }
 
     const apagarConta = async () => {
         const confirmou = window.confirm("Tem certeza que deseja apagar sua conta?");
@@ -63,6 +95,31 @@ function Inicio() {
             alert('Senha incorreta.');
         }
     };
+
+    function celulaEditavel(livro, campo) {
+        const emEdicao = editando?.livroId === livro.id && editando?.campo === campo;
+        if (emEdicao) {
+            return (
+                <td>
+                    <input
+                        autoFocus
+                        value={valorEdicao}
+                        onChange={e => setValorEdicao(e.target.value)}
+                        onKeyDown={e => {
+                            if (e.key === 'Enter') e.target.blur();
+                            if (e.key === 'Escape') setEditando(null);
+                        }}
+                        onBlur={() => salvarEdicao(livro)}
+                    />
+                </td>
+            );
+        }
+        return (
+            <td onDoubleClick={() => iniciarEdicao(livro, campo)}>
+                {livro[campo]}
+            </td>
+        );
+    }
 
     return (
         <div style={{ padding: '20px', maxWidth: '1000px', margin: '0 auto' }}>
@@ -93,15 +150,13 @@ function Inicio() {
                 {livros.length > 0 ? (
                     livros.map((livro) => (
                         <tr key={livro.id}>
-                            <td>{livro.titulo}</td>
-                            <td>{livro.descricao}</td>
-                            <td>{livro.totalPag}</td>
-                            <td>{livro.paginaAtual}</td>
-                            <td> {livro.totalPag != 0 ? Math.round((livro.paginaAtual / livro.totalPag) * 100) : 0}%</td>
-                            <td>{livro.status}</td>
-                            <td>
-                                <button onClick={() => alert(`Editar livro ${livro.id}`)}>Editar</button>
-                            </td>
+                            {celulaEditavel(livro, 'titulo')}
+                            {celulaEditavel(livro, 'descricao')}
+                            {celulaEditavel(livro, 'totalPag')}
+                            {celulaEditavel(livro, 'paginaAtual')}
+                            <td>{livro.totalPag ? Math.round((livro.paginaAtual / livro.totalPag) * 100) : '—'}%</td>
+                            {celulaEditavel(livro, 'status')}
+                            <td><button onClick={() => apagarLivro(livro.id)}>Apagar</button></td>
                         </tr>
                     ))
                 ) : (

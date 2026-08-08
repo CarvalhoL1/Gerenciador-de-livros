@@ -6,8 +6,8 @@ import jakarta.validation.constraints.NotNull;
 public record EditarLivroRequest(
         @NotBlank String titulo,
         String descricao,
-        @NotNull int pagAtual,
-        @NotNull int pagTotal,
+        @NotNull Integer pagAtual,
+        @NotNull Integer pagTotal,
         String status
 ) {
 }

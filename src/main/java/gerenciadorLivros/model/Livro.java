@@ -4,11 +4,11 @@ public class Livro {
     int id;
     String titulo;
     String descricao;
-    int total_pag;
+    Integer total_pag;
     String status;
-    int paginaAtual;
+    Integer paginaAtual;
 
-    public Livro(int id, String titulo, String descricao, int totalPag, String status, int paginaAtual) {
+    public Livro(int id, String titulo, String descricao, Integer totalPag, String status, Integer paginaAtual) {
         this.id = id;
         this.titulo = titulo;
         this.descricao = descricao;
@@ -16,7 +16,7 @@ public class Livro {
         this.status = status;
         this.paginaAtual = paginaAtual;
     }
-    public Livro(String titulo, String descricao, int total_pag) {
+    public Livro(String titulo, String descricao, Integer total_pag) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.total_pag = total_pag;
@@ -24,9 +24,9 @@ public class Livro {
     //getters e setters do livro
     public void setTitulo(String titulo) { this.titulo = titulo; }
     public void setDescricao(String descricao) { this.descricao = descricao; }
-    public void setTotal_pag(int total_pag) { this.total_pag = total_pag; }
+    public void setTotal_pag(Integer total_pag) { this.total_pag = total_pag; }
     public void setStatus(String status) { this.status = status; }
-    public void setPaginaAtual(int paginaAtual) { this.paginaAtual = paginaAtual; }
+    public void setPaginaAtual(Integer paginaAtual) { this.paginaAtual = paginaAtual; }
 
     public int getId() {
         return id;
@@ -40,7 +40,7 @@ public class Livro {
         return descricao;
     }
 
-    public int getTotalPag() {
+    public Integer getTotalPag() {
         return total_pag;
     }
 
@@ -48,7 +48,7 @@ public class Livro {
         return status;
     }
 
-    public int getPaginaAtual() {
+    public Integer getPaginaAtual() {
         return paginaAtual;
     }
 }

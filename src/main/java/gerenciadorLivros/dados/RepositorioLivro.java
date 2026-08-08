@@ -21,11 +21,13 @@ public class RepositorioLivro implements IRepositorioLivro {
             pstmt.setInt(1, id);
             pstmt.setString(2, livro.getTitulo());
             pstmt.setString(3, livro.getDescricao());
-            pstmt.setInt(4, livro.getTotalPag());
+            if (livro.getTotalPag() != null) {
+                pstmt.setInt(4, livro.getTotalPag());
+            } else {
+                pstmt.setNull(4, java.sql.Types.INTEGER);
+            }
 
             pstmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 
@@ -75,7 +77,7 @@ public class RepositorioLivro implements IRepositorioLivro {
         }
     }
 
-    public void editarPagTotal(int id, int pg) throws SQLException {
+    public void editarPagTotal(int id, Integer pg) throws SQLException {
         String insertSQL = "UPDATE livros SET total_paginas = ? WHERE id = ?";
         try (Connection connection = Conectar.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
@@ -90,11 +92,15 @@ public class RepositorioLivro implements IRepositorioLivro {
         }
     }
 
-    public void editarPagAtual(int id, int pg) throws SQLException {
+    public void editarPagAtual(int id, Integer pg) throws SQLException {
         String insertSQL = "UPDATE livros SET pagina_atual = ? WHERE id = ?";
         try (Connection connection = Conectar.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
-            pstmt.setInt(1, pg);
+            if (pg != null) {
+                pstmt.setInt(1, pg);
+            } else {
+                pstmt.setNull(1, java.sql.Types.INTEGER);
+            }
             pstmt.setInt(2, id);
             int linhasAfetadas = pstmt.executeUpdate();
             if (linhasAfetadas == 0) {

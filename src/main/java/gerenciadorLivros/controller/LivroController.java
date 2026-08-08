@@ -76,4 +76,17 @@ public class LivroController {
         List<Livro> livros = livrosService.listarMeusLivros(usuarioLogado.getId());
         return ResponseEntity.ok(livros);
     }
+    @DeleteMapping("/livros/{id}")
+    public ResponseEntity<?> deletarLivro(@PathVariable int id, HttpServletRequest httpRequest) throws SQLException {
+        String header = httpRequest.getHeader("Authorization");
+        if (header == null || !header.startsWith("Bearer ")) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Token ausente.");
+        }
+        Usuario usuarioLogado = sessaoService.buscarPorToken(header.substring(7));
+        if (usuarioLogado == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Sessão inválida.");
+        }
+        livrosService.deletarLivro(id);
+        return ResponseEntity.noContent().build();
+    }
 }
