@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import ModalAddLivro from './components/ModalAddLivro';
 import ModalAlterarNome from "./components/ModalAlterarNome";
 import ModalAlterarSenha from "./components/ModalAlterarSenha";
+import { IoMdInformationCircleOutline } from "react-icons/io";
 
 import api from '../api';
 
@@ -122,19 +123,19 @@ function Inicio() {
     }
 
     return (
-        <div style={{ padding: '20px', maxWidth: '1000px', margin: '0 auto' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-                <button onClick={handleLogout} style={{ fontWeight: 'bold' }}>
-                    Logout
+        <div className="dashboard-container">
+            <header className="dashboard-header">
+                <div>
+                    <span className="dashboard-boas-vindas">Bem-vindo(a), {nome}</span>
+                    {mensagem && <span className="mensagem-feedback"> - {mensagem}</span>}
+                </div>
+                <span className="dashboard-dica"><IoMdInformationCircleOutline /> Clique duas vezes para editar!</span>
+                <button onClick={handleLogout} className="btn-acao btn-secundario">
+                    Sair
                 </button>
-                <span style={{ color: 'blue' }}>Bem vindo/a, {nome}</span>
-                <span style={{ color: 'blue' }}>{mensagem}</span>
-
-                <span style={{ fontStyle: 'italic', color: '#666' }}>
-          Clique duas vezes para editar!
-        </span>
-            </div>
-            <table border="1" cellPadding="10" style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }}>
+            </header>
+            <div className="tabela-container">
+                <table className="tabela-livros">
                 <thead>
                 <tr style={{ background: '#f4f4f4' }}>
                     <th>Título</th>
@@ -156,7 +157,7 @@ function Inicio() {
                             {celulaEditavel(livro, 'paginaAtual')}
                             <td>{livro.totalPag ? Math.round((livro.paginaAtual / livro.totalPag) * 100) : '—'}%</td>
                             {celulaEditavel(livro, 'status')}
-                            <td><button onClick={() => apagarLivro(livro.id)}>Apagar</button></td>
+                            <td><button className='btn-deletar-tabela' onClick={() => apagarLivro(livro.id)}>Apagar</button></td>
                         </tr>
                     ))
                 ) : (
@@ -166,12 +167,20 @@ function Inicio() {
                 )}
                 </tbody>
             </table>
-
-            <div style={{ display: 'flex', gap: '10px' }}>
-                <button onClick={abrirModalAddLivro}>Cadastrar novo livro</button>
-                <button onClick={apagarConta} style={{ color: 'red' }}>Apagar conta</button>
-                <button onClick={abrirModalAlterarNome}>Alterar nome</button>
-                <button onClick={abrirModalAlterarSenha}>Alterar senha</button>
+            </div>
+            <div className="acoes-bar">
+                <button className="btn-acao btn-primario" onClick={abrirModalAddLivro}>
+                    + Cadastrar novo livro
+                </button>
+                <button className="btn-acao btn-secundario" onClick={abrirModalAlterarNome}>
+                    Alterar nome
+                </button>
+                <button className="btn-acao btn-secundario" onClick={abrirModalAlterarSenha}>
+                    Alterar senha
+                </button>
+                <button className="btn-acao btn-perigo" onClick={apagarConta}>
+                    Apagar conta
+                </button>
             </div>
             <ModalAddLivro
                 aberto={modalAddLivro}

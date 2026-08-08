@@ -31,7 +31,7 @@ function Cadastro() {
         }
     }
     return(
-        <div>
+        <div className='container-cadastro'>
             <h1>Cadastro</h1>
             <a href={"/login"}>Já tem uma conta? entrar</a>
             <form onSubmit={handleCadatro}>

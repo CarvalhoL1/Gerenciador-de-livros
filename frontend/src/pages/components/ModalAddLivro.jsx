@@ -46,9 +46,13 @@ function ModalAddLivro({ aberto, onFechar, onLivroAdicionado }) {
     }
 
     return (
-        <div onClick={handleFechar}>
-            <div onClick={e => e.stopPropagation()}>
-                <h2>Cadastrar novo livro</h2>
+        <div className="modal-overlay" onClick={onFechar}>
+            <div className="modal-container" onClick={e => e.stopPropagation()}>
+                <div className="modal-header">
+                    <h2>Cadastrar novo livro</h2>
+                    <button type="button" className="btn-acao btn-secundario" onClick={handleFechar}>Cancelar</button>
+                </div>
+                <div className="modal-body">
                 <form onSubmit={handleSubmit}>
                     {erro && <div className="erro">{erro}</div>}
 
@@ -82,9 +86,10 @@ function ModalAddLivro({ aberto, onFechar, onLivroAdicionado }) {
                         <button type="submit" disabled={salvando}>
                             {salvando ? 'Salvando...' : 'Salvar'}
                         </button>
-                        <button type="button" onClick={handleFechar}>Cancelar</button>
+
                     </div>
                 </form>
+                </div>
             </div>
         </div>
     );

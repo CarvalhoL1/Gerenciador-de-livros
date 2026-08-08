@@ -38,12 +38,15 @@ function ModalAlterarSenha({ aberto, onFechar}){
         onFechar();
     }
     return (
-        <div onClick={handleFechar}>
-            <div onClick={e => e.stopPropagation()}>
-                <h2>Alterar Senha</h2>
+        <div className="modal-overlay" onClick={onFechar}>
+            <div className="modal-container" onClick={e => e.stopPropagation()}>
+                <div className="modal-header">
+                    <h2>Alterar Senha</h2>
+                    <button type="button" className="btn-acao btn-secundario" onClick={handleFechar}>Cancelar</button>
+                </div>
+                <div className="modal-body">
                 <form onSubmit={handleEditarSenha}>
                     {erro && <div className="erro">{erro}</div>}
-
                     <input
                         placeholder="Confirme seu email"
                         value={email}
@@ -65,8 +68,8 @@ function ModalAlterarSenha({ aberto, onFechar}){
                     <button type="submit" disabled={salvando}>
                         {salvando ? 'Salvando...' : 'Salvar'}
                     </button>
-                    <button type="button" onClick={handleFechar}>Cancelar</button>
                 </form>
+                </div>
             </div>
         </div>
     );

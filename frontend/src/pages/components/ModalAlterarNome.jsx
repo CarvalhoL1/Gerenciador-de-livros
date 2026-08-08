@@ -33,9 +33,13 @@ function ModalAlterarNome({ aberto, onFechar}){
         onFechar();
     }
     return (
-        <div onClick={handleFechar}>
-            <div onClick={e => e.stopPropagation()}>
-                <h2>Alterar nome</h2>
+        <div className="modal-overlay" onClick={onFechar}>
+            <div className="modal-container" onClick={e => e.stopPropagation()}>
+                <div className="modal-header">
+                    <h2>Alterar nome</h2>
+                    <button className="btn-acao btn-secundario" type="button" onClick={handleFechar}>Cancelar</button>
+                </div>
+                <div className="modal-body">
                 <form onSubmit={handleEditarNome}>
                     {erro && <div className="erro">{erro}</div>}
 
@@ -48,8 +52,8 @@ function ModalAlterarNome({ aberto, onFechar}){
                     <button type="submit" disabled={salvando}>
                         {salvando ? 'Salvando...' : 'Salvar'}
                     </button>
-                    <button type="button" onClick={handleFechar}>Cancelar</button>
                 </form>
+                </div>
             </div>
         </div>
     );
