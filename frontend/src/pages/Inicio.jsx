@@ -97,9 +97,28 @@ function Inicio() {
         }
     };
 
+    const OPCOES_STATUS = ['quero_ler', 'lendo', 'pausado', 'lido', 'abandonado'];
+
     function celulaEditavel(livro, campo) {
         const emEdicao = editando?.livroId === livro.id && editando?.campo === campo;
+
         if (emEdicao) {
+            if (campo === 'status') {
+                return (
+                    <td>
+                        <select
+                            autoFocus
+                            value={valorEdicao}
+                            onChange={e => setValorEdicao(e.target.value)}
+                            onBlur={() => salvarEdicao(livro)}
+                        >
+                            {OPCOES_STATUS.map(opcao => (
+                                <option key={opcao} value={opcao}>{opcao}</option>
+                            ))}
+                        </select>
+                    </td>
+                );
+            }
             return (
                 <td>
                     <input
@@ -115,13 +134,13 @@ function Inicio() {
                 </td>
             );
         }
+
         return (
             <td onDoubleClick={() => iniciarEdicao(livro, campo)}>
                 {livro[campo]}
             </td>
         );
     }
-
     return (
         <div className="dashboard-container">
             <header className="dashboard-header">
