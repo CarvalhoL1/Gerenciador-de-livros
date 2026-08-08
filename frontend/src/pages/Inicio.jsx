@@ -144,11 +144,11 @@ function Inicio() {
     return (
         <div className="dashboard-container">
             <header className="dashboard-header">
-                <div>
+                <div className="dashboard-textos">
                     <span className="dashboard-boas-vindas">Bem-vindo(a), {nome}</span>
                     {mensagem && <span className="mensagem-feedback"> - {mensagem}</span>}
+                    <span className="dashboard-dica"><IoMdInformationCircleOutline /> Clique duas vezes para editar!</span>
                 </div>
-                <span className="dashboard-dica"><IoMdInformationCircleOutline /> Clique duas vezes para editar!</span>
                 <button onClick={handleLogout} className="btn-acao btn-secundario">
                     Sair
                 </button>

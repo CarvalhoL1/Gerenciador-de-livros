@@ -46,7 +46,15 @@ public class LivroController {
     }
 
     @PutMapping("/livros/{id}")
-    public ResponseEntity<?> editarLivroGeral(@PathVariable int id, @Valid @RequestBody EditarLivroRequest request) {
+    public ResponseEntity<?> editarLivroGeral(@PathVariable int id, @Valid @RequestBody EditarLivroRequest request, HttpServletRequest httpRequest) throws SQLException {
+        String header = httpRequest.getHeader("Authorization");
+        if (header == null || !header.startsWith("Bearer ")) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Token ausente.");
+        }
+        Usuario usuarioLogado = sessaoService.buscarPorToken(header.substring(7));
+        if (usuarioLogado == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Sessão inválida.");
+        }
         try {
             livrosService.editarTitulo(id, request.titulo());
             livrosService.editarDesricao(id, request.descricao());

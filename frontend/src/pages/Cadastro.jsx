@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import api from '../api'
+import {FaBook} from "react-icons/fa";
 
 function Cadastro() {
     const navigate = useNavigate()
@@ -32,8 +33,9 @@ function Cadastro() {
     }
     return(
         <div className='container-cadastro'>
-            <h1>Cadastro</h1>
+            <h1>Gerenciador de Livros <FaBook /></h1>
             <a href={"/login"}>Já tem uma conta? entrar</a>
+            <p>Cadastro </p>
             <form onSubmit={handleCadatro}>
                 {erro && !carregando && <div className="erro">{erro}</div>}
                 {carregando && <div className="carregando">Carregando...</div>}
@@ -48,7 +50,7 @@ function Cadastro() {
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                 />
-                <div>
+                <div className="campo-senha">
                     <input
                         type={mostrarSenha ? "text" : "password"}
                         placeholder="Senha"
@@ -56,9 +58,9 @@ function Cadastro() {
                         onChange={e => setSenha(e.target.value)}
                     />
                         <span
+                            className="toggle-senha"
                             onClick={alternarSenha}>
-                    {mostrarSenha ? <FiEyeOff /> : <FiEye />}
-
+                            {mostrarSenha ? <FiEyeOff /> : <FiEye />}
                         </span>
                 </div>
                 <button type="submit">Criar Conta</button>
